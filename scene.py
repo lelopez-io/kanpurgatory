@@ -1,126 +1,167 @@
 from manim import *
 
-class ScriptToVideo(Scene):
+class TikTokVideo(Scene):
+    def __init__(self):
+        # Configure for vertical video (9:16 aspect ratio)
+        config.frame_width = 9.0
+        config.frame_height = 16.0
+        config.pixel_width = 1080
+        config.pixel_height = 1920
+        super().__init__()
+
     def construct(self):
-        # Example script segments
+        # Example script segments optimized for TikTok
         script = [
             {
-                "text": "Welcome to this explanation",
-                "duration": 2,
-                "position": DOWN,
-                "image_desc": "A welcoming scene"
+                "text": "Did you know?",
+                "duration": 1.5,
+                "position": UP * 5,  # Position near top of vertical frame
+                "style": "title"
             },
             {
-                "text": "Let's explore this concept",
-                "duration": 2.5,
-                "position": UP,
-                "image_desc": "Abstract concept visualization"
+                "text": "Here's something\ninteresting...",
+                "duration": 2,
+                "position": ORIGIN,  # Center of frame
+                "style": "body"
+            },
+            {
+                "text": "#learnontiktok",
+                "duration": 1.5,
+                "position": DOWN * 6,  # Position near bottom for hashtags
+                "style": "hashtag"
             }
         ]
 
+        # Define text styles for mobile viewing
+        styles = {
+            "title": {
+                "font_size": 96,
+                "color": "#FFFFFF",
+                "weight": "BOLD"
+            },
+            "body": {
+                "font_size": 72,
+                "color": "#FFFFFF",
+                "weight": "NORMAL"
+            },
+            "hashtag": {
+                "font_size": 48,
+                "color": "#00F5FF",  # Bright cyan for hashtags
+                "weight": "NORMAL"
+            }
+        }
+
         # Create and animate each segment
         for segment in script:
-            # Create text
-            text = Text(segment["text"])
+            # Apply style based on segment type
+            style = styles[segment["style"]]
+
+            # Create text with mobile-optimized styling
+            text = Text(
+                segment["text"],
+                font_size=style["font_size"],
+                color=style["color"],
+                weight=style["weight"]
+            )
             text.move_to(segment["position"])
 
-            # Optional: Create background image/shape
-            # This could be replaced with AI-generated images
-            background = self.create_background(segment["image_desc"])
+            # Create background for this segment
+            background = self.create_mobile_background(segment["style"])
 
             # Animate sequence
             self.play(
                 FadeIn(background),
                 Write(text),
-                run_time=1
+                run_time=0.5  # Faster animations for TikTok
             )
-            self.wait(segment["duration"] - 1)  # Account for fade-in time
+            self.wait(segment["duration"])
             self.play(
                 FadeOut(background),
                 Unwrite(text),
-                run_time=0.5
+                run_time=0.3
             )
 
-    def create_background(self, description):
-        """
-        Create a placeholder background based on description
-        In a full implementation, this could call an image generation API
-        """
-        # Create a colored rectangle using the default frame dimensions
-        color = random_bright_color()
-        return Rectangle(
-            width=14,  # Default Manim frame width
-            height=8,  # Default Manim frame height
-            fill_opacity=0.3,
-            fill_color=color,
-            stroke_width=0
-        )
+    def create_mobile_background(self, style):
+        """Create backgrounds optimized for mobile viewing"""
+        if style == "title":
+            # Gradient background for titles
+            background = VGroup()
+            rect = Rectangle(
+                width=config.frame_width,
+                height=config.frame_height/3,
+                fill_opacity=0.3,
+                fill_color="#FF0080",  # Hot pink
+                stroke_width=0
+            ).move_to(UP * 5)
+            # Add gradient overlay
+            gradient = Rectangle(
+                width=config.frame_width,
+                height=config.frame_height/3,
+                fill_opacity=0.4,
+                stroke_width=0
+            ).move_to(UP * 5)
+            gradient.set_color_by_gradient(RED, BLUE)
+            background.add(rect, gradient)
+            return background
+        elif style == "hashtag":
+            # Subtle background for hashtags
+            return Rectangle(
+                width=config.frame_width,
+                height=config.frame_height/4,
+                fill_opacity=0.2,
+                fill_color="#1D2B53",  # Dark blue
+                stroke_width=0
+            ).move_to(DOWN * 6)
+        else:
+            # Default background for body text
+            return Rectangle(
+                width=config.frame_width,
+                height=config.frame_height/2,
+                fill_opacity=0.25,
+                fill_color="#2B2B2B",
+                stroke_width=0
+            )
 
-class AdvancedScriptScene(Scene):
+class TikTokTransitions(Scene):
+    """Additional class for TikTok-specific transitions"""
+    def __init__(self):
+        config.frame_width = 9.0
+        config.frame_height = 16.0
+        config.pixel_width = 1080
+        config.pixel_height = 1920
+        super().__init__()
+
     def construct(self):
-        """More advanced implementation with multiple animation styles"""
-        self.camera.background_color = "#111111"
+        # Example of a trending TikTok-style text reveal
+        text = Text("Trending\nTip!", font_size=120)
+        text.arrange(DOWN, aligned_edge=LEFT)
 
-        # Define animation presets
-        animations = {
-            "emphasis": lambda obj: [
-                ScaleInPlace(obj, 1.2),
-                ScaleInPlace(obj, 1/1.2)
-            ],
-            "slide": lambda obj: [
-                FadeIn(obj, shift=RIGHT*2)
-            ],
-            "typewriter": lambda obj: [
-                AddTextLetterByLetter(obj, run_time=2)
-            ]
-        }
+        # Create individual letters for the text reveal effect
+        letters = VGroup(*[Text(letter, font_size=120) for letter in "Trending"])
+        letters.arrange(RIGHT, buff=0.1)
+        letters.move_to(text[0])
 
-        # Example script with animation specifications
-        script = [
-            {
-                "text": "Key Concept",
-                "style": "emphasis",
-                "duration": 2,
-                "font_size": 72,
-                "color": "#FFFFFF"
-            },
-            {
-                "text": "Supporting details that explain the concept",
-                "style": "typewriter",
-                "duration": 3,
-                "font_size": 48,
-                "color": "#CCCCCC"
-            }
-        ]
-
-        # Process each segment
-        for segment in script:
-            # Create text with specified styling
-            text = Text(
-                segment["text"],
-                font_size=segment["font_size"],
-                color=segment["color"]
+        # Animate letters appearing with bounce effect
+        for letter in letters:
+            self.play(
+                Create(letter),
+                letter.animate.scale(1.2).shift(UP*0.5),
+                run_time=0.15
+            )
+            self.play(
+                letter.animate.scale(1/1.2).shift(DOWN*0.5),
+                run_time=0.1
             )
 
-            # Get animation style
-            anim_style = animations[segment["style"]]
+        self.wait(0.5)
 
-            # Play animations
-            self.play(*anim_style(text))
-            self.wait(segment["duration"])
-            self.play(FadeOut(text))
-
-    def create_image_background(self, prompt):
-        """
-        Placeholder for AI image generation
-        Could be integrated with Stable Diffusion or similar
-        """
-        pass
+        # Quick fade out
+        self.play(FadeOut(letters), run_time=0.3)
 
 # Usage:
 if __name__ == "__main__":
-    # Command to render:
-    # manim -pql scene.py ScriptToVideo
-    # or for higher quality:
-    # manim -pqh script.py AdvancedScriptScene
+    # Command to render TikTok video:
+    # manim -pql scene.py TikTokVideo
+    # For transitions test:
+    # manim -pql scene.py TikTokTransitions
     pass
