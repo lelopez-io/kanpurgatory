@@ -1,14 +1,4 @@
 from manim import *
-import manimpango
-from pathlib import Path
-
-# First register the font
-FONT_PATH = "/Users/lelopez/Library/Fonts/Spectral-ExtraLight.ttf"
-try:
-    manimpango.register_font(FONT_PATH)
-    print(f"Successfully registered font from {FONT_PATH}")
-except Exception as e:
-    print(f"Error registering font: {e}")
 
 class TikTokVideo(Scene):
     def __init__(self):
@@ -22,45 +12,111 @@ class TikTokVideo(Scene):
     def construct(self):
         self.camera.background_color = BLACK
 
-        # Print available fonts to debug
-        print("\nAvailable fonts after registration:")
-        for font in manimpango.list_fonts():
-            print(f"- {font}")
-
-        # Test text with different font specifications
-        test_texts = [
-            {"text": "Test 1 - Direct Path", "font": FONT_PATH},
-            {"text": "Test 2 - Font Family", "font": "Spectral"},
-            {"text": "Test 3 - Full Name", "font": "Spectral ExtraLight"},
-            {"text": "Test 4 - Hyphenated", "font": "Spectral-ExtraLight"}
+        # Example script segments with Spectral font
+        script = [
+            {
+                "text": "Did you know?",
+                "duration": 1.5,
+                "position": UP * 5,
+                "font_size": 96
+            },
+            {
+                "text": "Here's something\ninteresting...",
+                "duration": 2,
+                "position": ORIGIN,
+                "font_size": 72
+            },
+            {
+                "text": "#learnontiktok",
+                "duration": 1.5,
+                "position": DOWN * 6,
+                "font_size": 48
+            }
         ]
 
-        current_pos = 3
-        for test in test_texts:
-            try:
-                text = Text(
-                    test["text"],
-                    font=test["font"],
-                    font_size=48,
-                    color=WHITE
-                ).move_to(UP * current_pos)
+        # Create and animate each segment
+        for segment in script:
+            # Create text with Spectral font
+            text = Text(
+                segment["text"],
+                font="Spectral",  # Using the working font family name
+                font_size=segment["font_size"],
+                color=WHITE
+            ).move_to(segment["position"])
 
-                print(f"\nSuccessfully created text with font: {test['font']}")
+            # Optional: Add slight shadow for better readability
+            # Using a more subtle shadow for the elegant Spectral font
+            text_shadow = text.copy().set_color(BLACK).set_opacity(0.3)
+            text_shadow.shift(RIGHT * 0.015 + DOWN * 0.015)  # Smaller offset
 
-                # Create and display the text
-                self.play(
-                    Write(text),
-                    run_time=1
-                )
+            # Animate sequence
+            self.play(
+                FadeIn(text_shadow, run_time=0.3),
+                FadeIn(text, run_time=0.3)
+            )
+            self.wait(segment["duration"])
+            self.play(
+                FadeOut(text_shadow, run_time=0.2),
+                FadeOut(text, run_time=0.2)
+            )
 
-            except Exception as e:
-                print(f"Failed to create text with font {test['font']}: {e}")
+# Additional class for testing different text animations with Spectral
+class TextAnimations(Scene):
+    def __init__(self):
+        config.frame_width = 9.0
+        config.frame_height = 16.0
+        config.pixel_width = 1080
+        config.pixel_height = 1920
+        super().__init__()
 
-            current_pos -= 2
+    def construct(self):
+        self.camera.background_color = BLACK
+
+        # Gentle fade up from bottom
+        text1 = Text(
+            "Fade from below",
+            font="Spectral",
+            font_size=72,
+            color=WHITE
+        ).move_to(UP * 2)
+
+        self.play(
+            FadeIn(text1, shift=UP * 0.5),
+            run_time=0.8
+        )
+
+        # Letter by letter reveal
+        text2 = Text(
+            "Letter by letter",
+            font="Spectral",
+            font_size=72,
+            color=WHITE
+        )
+
+        self.play(
+            AddTextLetterByLetter(text2),
+            run_time=1.5
+        )
+
+        # Scale reveal
+        text3 = Text(
+            "Scale reveal",
+            font="Spectral",
+            font_size=72,
+            color=WHITE
+        ).move_to(DOWN * 2)
+
+        self.play(
+            Create(text3, scale=1.2),
+            run_time=1
+        )
 
         self.wait(2)
 
 # Usage:
 if __name__ == "__main__":
+    # For main video:
     # manim -pql scene.py TikTokVideo
+    # For animation examples:
+    # manim -pql scene.py TextAnimations
     pass
