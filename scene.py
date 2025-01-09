@@ -1,122 +1,149 @@
 from manim import *
 
-class TikTokVideo(Scene):
+class KanpurgatoryVideo(Scene):
     def __init__(self):
-        # Configure for vertical video (9:16 aspect ratio)
+        # Vertical video configuration
         config.frame_width = 9.0
         config.frame_height = 16.0
         config.pixel_width = 1080
         config.pixel_height = 1920
         super().__init__()
 
-    def construct(self):
-        self.camera.background_color = BLACK
+    def create_text_block(self, text, size=48, opacity=1):
+        return Text(
+            text,
+            font="Spectral",
+            font_size=size,
+            color=WHITE,
+            weight="NORMAL",
+            opacity=opacity,
+            line_spacing=1.2  # Increased line spacing for readability
+        )
 
-        # Example script segments with Spectral font
-        script = [
-            {
-                "text": "Did you know?",
-                "duration": 1.5,
-                "position": UP * 5,
-                "font_size": 96
-            },
-            {
-                "text": "Here's something\ninteresting...",
-                "duration": 2,
-                "position": ORIGIN,
-                "font_size": 72
-            },
-            {
-                "text": "#learnontiktok",
-                "duration": 1.5,
-                "position": DOWN * 6,
-                "font_size": 48
-            }
-        ]
-
-        # Create and animate each segment
-        for segment in script:
-            # Create text with Spectral font
-            text = Text(
-                segment["text"],
-                font="Spectral",  # Using the working font family name
-                font_size=segment["font_size"],
-                color=WHITE
-            ).move_to(segment["position"])
-
-            # Optional: Add slight shadow for better readability
-            # Using a more subtle shadow for the elegant Spectral font
-            text_shadow = text.copy().set_color(BLACK).set_opacity(0.3)
-            text_shadow.shift(RIGHT * 0.015 + DOWN * 0.015)  # Smaller offset
-
-            # Animate sequence
-            self.play(
-                FadeIn(text_shadow, run_time=0.3),
-                FadeIn(text, run_time=0.3)
-            )
-            self.wait(segment["duration"])
-            self.play(
-                FadeOut(text_shadow, run_time=0.2),
-                FadeOut(text, run_time=0.2)
-            )
-
-# Additional class for testing different text animations with Spectral
-class TextAnimations(Scene):
-    def __init__(self):
-        config.frame_width = 9.0
-        config.frame_height = 16.0
-        config.pixel_width = 1080
-        config.pixel_height = 1920
-        super().__init__()
+    def fade_transform(self, old_text, new_text):
+        """Smooth transition between text blocks"""
+        self.play(
+            FadeOut(old_text, shift=UP * 0.3, run_time=1),
+            FadeIn(new_text, shift=UP * 0.3, run_time=1)
+        )
 
     def construct(self):
         self.camera.background_color = BLACK
 
-        # Gentle fade up from bottom
-        text1 = Text(
-            "Fade from below",
-            font="Spectral",
-            font_size=72,
-            color=WHITE
-        ).move_to(UP * 2)
+        # Title sequence
+        title = self.create_text_block("Kanpurgatory:", size=72)
+        subtitle = self.create_text_block("Field Notes from the In-Between", size=48)
 
+        title.move_to(UP * 2)
+        subtitle.next_to(title, DOWN, buff=0.5)
+
+        # Fade in title with letter reveal
         self.play(
-            FadeIn(text1, shift=UP * 0.5),
-            run_time=0.8
+            AddTextLetterByLetter(title, run_time=2),
+            rate_func=linear
         )
-
-        # Letter by letter reveal
-        text2 = Text(
-            "Letter by letter",
-            font="Spectral",
-            font_size=72,
-            color=WHITE
-        )
-
         self.play(
-            AddTextLetterByLetter(text2),
+            FadeIn(subtitle, shift=UP * 0.3),
             run_time=1.5
         )
+        self.wait(2)
 
-        # Scale reveal
-        text3 = Text(
-            "Scale reveal",
-            font="Spectral",
-            font_size=72,
-            color=WHITE
-        ).move_to(DOWN * 2)
-
-        self.play(
-            Create(text3, scale=1.2),
-            run_time=1
+        # Opening paragraph
+        opening = self.create_text_block(
+            "The endless horizon stretches\nbefore me like judgment day\nitself - flat, unforgiving,\neternal.",
+            size=56
         )
 
-        self.wait(2)
+        # Transition from title to first text
+        self.play(
+            FadeOut(title, shift=UP),
+            FadeOut(subtitle, shift=UP),
+            FadeIn(opening, shift=UP * 0.3),
+            run_time=1.5
+        )
+        self.wait(3)
+
+        # First passage
+        text1 = self.create_text_block(
+            "What should have been a\nsingle day's passage through\nKansas, transformed into a\nfour-day sentence in\nwinter's prison.",
+            size=56
+        )
+
+        # Gentle fade between texts
+        self.fade_transform(opening, text1)
+        self.wait(3)
+
+        # Second passage with thematic emphasis
+        text2 = self.create_text_block(
+            "Here in this liminal space,\nwhere heaven meets earth\nin a razor-thin line,\nI discovered that purgatory\nisn't just a theological concept\n- it's a state of being.",
+            size=52
+        )
+
+        self.fade_transform(text1, text2)
+        self.wait(3)
+
+        # Final contemplative line
+        text3 = self.create_text_block(
+            "Not quite damnation,\nnot quite salvation.\n\nJust... Kansas.",
+            size=56
+        )
+
+        # Slower, more dramatic transition for the final revelation
+        self.play(
+            FadeOut(text2, shift=UP * 0.3, run_time=1.5),
+            FadeIn(text3, shift=UP * 0.3, run_time=1.5)
+        )
+        self.wait(3)
+
+        # Fade to black
+        self.play(
+            FadeOut(text3, run_time=2)
+        )
+        self.wait(1)
+
+# Alternative version with different animation style
+class KanpurgatoryAlt(Scene):
+    def __init__(self):
+        config.frame_width = 9.0
+        config.frame_height = 16.0
+        config.pixel_width = 1080
+        config.pixel_height = 1920
+        super().__init__()
+
+    def construct(self):
+        self.camera.background_color = BLACK
+
+        def create_text(text, size=56):
+            return Text(
+                text,
+                font="Spectral",
+                font_size=size,
+                color=WHITE,
+                weight="NORMAL",
+                line_spacing=1.2
+            )
+
+        # Reveal text with a gentle typewriter effect and subtle scaling
+        def reveal_text(text_obj):
+            self.play(
+                AddTextLetterByLetter(text_obj, time_per_char=0.05),
+                text_obj.animate.scale(1.02),
+                run_time=2
+            )
+            self.play(
+                text_obj.animate.scale(1/1.02),
+                run_time=0.5
+            )
+
+        # Create your scenes here with alternate animation style
+        title = create_text("Kanpurgatory", size=72)
+        reveal_text(title)
+        self.wait(1)
 
 # Usage:
 if __name__ == "__main__":
-    # For main video:
-    # manim -pql scene.py TikTokVideo
-    # For animation examples:
-    # manim -pql scene.py TextAnimations
+    # For main version:
+    # manim -pql scene.py KanpurgatoryVideo
+    # For alternative style:
+    # manim -pql scene.py KanpurgatoryAlt
     pass
