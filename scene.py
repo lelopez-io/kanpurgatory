@@ -1,9 +1,22 @@
 from manim import *
 from manim_voiceover import VoiceoverScene
 from manim_voiceover.services.elevenlabs import ElevenLabsService
+from manim_voiceover.services.base import SpeechService
 from content import Content
 from dotenv import load_dotenv
 import os
+import argparse
+
+class MockSpeechService(SpeechService):
+    """Mock speech service for development that doesn't hit external APIs"""
+    def __init__(self):
+        super().__init__()
+        
+    def generate_speech(self, text: str, cache_dir: str = None) -> str:
+        # Return duration based on word count (rough estimate)
+        words = len(text.split())
+        self.last_duration = words * 0.3  # Assume 0.3 seconds per word
+        return None
 
 class KanpurgatoryVideo(VoiceoverScene):
     content: Content
@@ -18,13 +31,21 @@ class KanpurgatoryVideo(VoiceoverScene):
         # Load environment variables
         load_dotenv()
 
-        # Initialize ElevenLabs with Brian voice for testing
-        self.set_speech_service(
-            ElevenLabsService(
-                api_key=os.getenv('ELEVENLABS_API_KEY'),
-                voice_id="nPczCjzI2devNBz1zQrb"  # Brian voice ID for testing
+        # Parse command line arguments
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--dev', action='store_true', help='Use mock speech service')
+        args, _ = parser.parse_known_args()
+
+        # Initialize speech service based on mode
+        if args.dev:
+            self.set_speech_service(MockSpeechService())
+        else:
+            self.set_speech_service(
+                ElevenLabsService(
+                    api_key=os.getenv('ELEVENLABS_API_KEY'),
+                    voice_id="nPczCjzI2devNBz1zQrb"  # Brian voice ID for testing
+                )
             )
-        )
 
 
     def create_text_block(self, text, opacity=1, margin=0.2):

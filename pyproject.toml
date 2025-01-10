@@ -7,7 +7,7 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
-manim = "0.14.0"
+manim = "0.18.1"
 numpy = "*"
 scipy = "*"
 python-dotenv = "*"
