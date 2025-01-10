@@ -47,45 +47,37 @@ class KanpurgatoryVideo(VoiceoverScene):
             )
 
 
-    def create_progress_indicator(self):
-        # Create progress group
-        progress_group = VGroup()
-        
-        # Create progress bar background
-        bar_width = config.frame_width
+    def create_progress_bar(self):
+        # Create progress bar at the very top
         bar_height = 0.1
-        progress_bg = Rectangle(
-            width=bar_width,
+        
+        # Background bar
+        bg = Rectangle(
+            width=config.frame_width,
             height=bar_height,
             fill_color=BLACK,
             fill_opacity=1,
             stroke_width=0
-        )
-        # Position at top edge
-        progress_bg.to_edge(UP, buff=0)
+        ).to_edge(UP, buff=0)
         
-        # Create progress fill
-        progress_fill = Rectangle(
-            width=0,  # Starts empty
+        # Progress fill
+        fill = Rectangle(
+            width=0,
             height=bar_height,
             fill_color="#2B7CD4",
             fill_opacity=1,
             stroke_width=0
-        )
-        progress_fill.align_to(progress_bg, LEFT)
-        # Position at top edge, aligned left
-        progress_fill.to_edge(UP, buff=0)
-        progress_fill.to_edge(LEFT, buff=0)
+        ).to_edge(UP, buff=0).to_edge(LEFT, buff=0)
         
-        # Create counter text
-        counter_text = Text(
+        return VGroup(bg, fill)
+    
+    def create_passage_counter(self):
+        # Create counter text in top right
+        return Text(
             f"{self.current_passage + 1} / {self.total_passages}",
             font_size=24,
             font="Spectral"
         ).to_edge(RIGHT, buff=0.5).to_edge(UP, buff=0.5)
-        
-        progress_group.add(progress_bg, progress_fill, counter_text)
-        return progress_group
 
     def create_text_block(self, text, opacity=1, margin=0.2):
         # Transform display text
@@ -145,14 +137,20 @@ class KanpurgatoryVideo(VoiceoverScene):
         progress_group = None
         
         for passage in self.content.passages:
-            # Update progress indicator
-            if progress_group:
-                self.remove(progress_group)
-            progress_group = self.create_progress_indicator()
-            self.add(progress_group)
+            # Update progress elements
+            if 'progress_bar' in locals():
+                self.remove(progress_bar)
+            if 'passage_counter' in locals():
+                self.remove(passage_counter)
+                
+            progress_bar = self.create_progress_bar()
+            passage_counter = self.create_passage_counter()
             
-            # Get the progress fill rectangle
-            progress_fill = progress_group[1]
+            self.add(progress_bar)
+            self.add(passage_counter)
+            
+            # Get progress fill for animation
+            progress_fill = progress_bar[1]
             next_text = self.create_text_block(passage.text)
 
             # Transform text for voice service
