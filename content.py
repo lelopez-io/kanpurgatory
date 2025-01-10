@@ -1,11 +1,9 @@
 from dataclasses import dataclass
-from typing import Optional, Tuple
-from audio import AudioGenerator
+from typing import Optional
 
 @dataclass
 class Passage:
     text: str
-    audio_file: str
     next: Optional['Passage'] = None
 
 @dataclass
@@ -44,17 +42,12 @@ class Content:
     passages: tuple[Passage, ...] = None
 
     def __post_init__(self):
-        audio_gen = AudioGenerator()
-        tones = audio_gen.generate_passage_tones(len(self.story))
-        
         self.passages = tuple(
             Passage(
                 "\n".join(lines),
-                audio_file=tone,
                 next=None if i == len(self.story) - 1 else Passage(
-                    "\n".join(self.story[i + 1]),
-                    audio_file=tones[i + 1]
+                    "\n".join(self.story[i + 1])
                 )
             )
-            for i, (lines, tone) in enumerate(zip(self.story, tones))
+            for i, lines in enumerate(self.story)
         )
