@@ -107,7 +107,7 @@ class KanpurgatoryVideo(VoiceoverScene):
             voice_text = (passage.text
                          .replace("|||", " . . . ")  # Add pause for marker
                          .replace("...", " . . . ")  # Regular ellipsis handling
-                         .replace("***", ' " ')  # Add emphasis markers
+                         .replace("***", ' "" ')  # Add emphasis markers
             )
             with self.voiceover(text=voice_text) as tracker:
                 # Quick fade transition at the start (0.5 seconds)
