@@ -3,6 +3,7 @@ name = "kanpurgatory"
 version = "0.1.0"
 description = "A Manim animation project exploring the liminal space of Kansas through poetry and animation"
 authors = ["Your Name <your.email@example.com>"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"

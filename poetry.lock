@@ -1470,24 +1470,6 @@ video = ["av (==9.2.0)"]
 vision = ["Pillow (>=10.0.1,<=15.0)"]
 
 [[package]]
-name = "triton"
-version = "1.0.0"
-description = "A language and compiler for custom Deep Learning operations"
-optional = false
-python-versions = "*"
-groups = ["main"]
-files = [
-    {file = "triton-1.0.0-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1a889a0069b1dee0f3fbcd3cfd97e8ccf8f95c2cf6bc9a00b8aeaa7965504ef9"},
-    {file = "triton-1.0.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5b4f4230d4067770f6d45db0e1a4b9c9294e3ce06d1a2c59d4cf09dd8282b9f5"},
-    {file = "triton-1.0.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ef7fbfe93485ddbdeb7c9ca03c1511829bc86df74c769e17dacb60638fbf2033"},
-    {file = "triton-1.0.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:37b8d0eb36ed7631a6f9d01bd3183f900ae7dbd9e5e40112468a3568505671dc"},
-    {file = "triton-1.0.0-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:38f14022b8226e5038e0a3d0b50c84db21e20e571079d2d3bc1e3f9ef8db2d35"},
-]
-
-[package.dependencies]
-torch = "*"
-
-[[package]]
 name = "typing-extensions"
 version = "3.10.0.2"
 description = "Backported and Experimental Type Hints for Python 3.5+"
@@ -1521,4 +1503,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "3dfd1a2de4c3484fee32d78c96379b99590f015ed04d332e87240b9f124f4e22"
+content-hash = "567e68e0d76fc3dd8e3f97a8356c67f131912221f7bb3a4e2a986d035eec9c5a"
