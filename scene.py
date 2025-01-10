@@ -9,28 +9,28 @@ class KanpurgatoryVideo(Scene):
         config.pixel_height = 1920
         super().__init__()
 
-    def create_text_block(self, text, size=48, opacity=1, margin=0.2):
+    def create_text_block(self, text, opacity=1, margin=0.2):
         text_obj = Text(
             text,
             font="Spectral",
-            font_size=size,
+            font_size=56,  # Default base size that will scale automatically
             color=WHITE,
             weight="NORMAL",
             opacity=opacity,
             line_spacing=1.2  # Increased line spacing for readability
         )
-        
+
         # Get frame dimensions with custom margin
         frame_width = config.frame_width * (1 - margin)
         frame_height = config.frame_height * (1 - margin)
-        
+
         # Scale down if text is too large
         if text_obj.width > frame_width or text_obj.height > frame_height:
             scale_factor_w = frame_width / text_obj.width
             scale_factor_h = frame_height / text_obj.height
             scale_factor = min(scale_factor_w, scale_factor_h)
             text_obj.scale(scale_factor)
-        
+
         return text_obj
 
     def fade_transform(self, old_text, new_text):
@@ -41,11 +41,12 @@ class KanpurgatoryVideo(Scene):
         )
 
     def construct(self):
+        # Set background color
         self.camera.background_color = BLACK
 
         # Title sequence
-        title = self.create_text_block("Kanpurgatory:", size=72)
-        subtitle = self.create_text_block("Field Notes from the In-Between", size=48)
+        title = self.create_text_block("Kanpurgatory:")
+        subtitle = self.create_text_block("Field Notes from the In-Between")
 
         title.move_to(UP * 2)
         subtitle.next_to(title, DOWN, buff=0.5)
@@ -63,8 +64,7 @@ class KanpurgatoryVideo(Scene):
 
         # Opening paragraph
         opening = self.create_text_block(
-            "The endless horizon stretches\nbefore me like judgment day\nitself - flat, unforgiving,\neternal.",
-            size=56
+            "The endless horizon stretches\nbefore me like judgment day\nitself - flat, unforgiving,\neternal."
         )
 
         # Transition from title to first text
@@ -78,8 +78,7 @@ class KanpurgatoryVideo(Scene):
 
         # First passage
         text1 = self.create_text_block(
-            "What should have been a\nsingle day's passage through\nKansas, transformed into a\nfour-day sentence in\nwinter's prison.",
-            size=56
+            "What should have been a\nsingle day's passage through\nKansas, transformed into a\nfour-day sentence in\nwinter's prison."
         )
 
         # Gentle fade between texts
@@ -88,8 +87,7 @@ class KanpurgatoryVideo(Scene):
 
         # Second passage with thematic emphasis
         text2 = self.create_text_block(
-            "Here in this liminal space,\nwhere heaven meets earth\nin a razor-thin line,\nI discovered that purgatory\nisn't just a theological concept\n- it's a state of being.",
-            size=52
+            "Here in this liminal space,\nwhere heaven meets earth\nin a razor-thin line,\nI discovered that purgatory\nisn't just a theological concept\n- it's a state of being."
         )
 
         self.fade_transform(text1, text2)
@@ -97,8 +95,7 @@ class KanpurgatoryVideo(Scene):
 
         # Final contemplative line
         text3 = self.create_text_block(
-            "Not quite damnation,\nnot quite salvation.\n\nJust... Kansas.",
-            size=56
+            "Not quite damnation,\nnot quite salvation.\n\nJust... Kansas."
         )
 
         # Slower, more dramatic transition for the final revelation
@@ -117,6 +114,7 @@ class KanpurgatoryVideo(Scene):
 # Alternative version with different animation style
 class KanpurgatoryAlt(Scene):
     def __init__(self):
+        # Vertical video configuration
         config.frame_width = 9.0
         config.frame_height = 16.0
         config.pixel_width = 1080
