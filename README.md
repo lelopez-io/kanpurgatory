@@ -32,7 +32,15 @@ Voice: "Brian"
 ### System Dependencies
 ```bash
 # Install system dependencies (macOS)
-brew install py3cairo ffmpeg pango pkg-config scipy sox
+brew install py3cairo ffmpeg pango pkg-config scipy sox llvm
+```
+
+### Environment Setup
+```bash
+# Add LLVM to your path and set required environment variables
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 ```
 
 ### Development Environment
