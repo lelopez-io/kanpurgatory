@@ -104,6 +104,7 @@ class KanpurgatoryVideo(Scene):
                 # Middle passages - normal fade transform
                 self.fade_transform(current_text, next_text)
 
+            self.add_sound(passage.audio_file)
             self.wait(self.calculate_wait_time(passage.text))
             current_text = next_text
 
