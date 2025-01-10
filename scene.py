@@ -113,50 +113,7 @@ class KanpurgatoryVideo(Scene):
         )
         self.wait(1)
 
-# Alternative version with different animation style
-class KanpurgatoryAlt(Scene):
-    def __init__(self):
-        # Vertical video configuration
-        config.frame_width = 9.0
-        config.frame_height = 16.0
-        config.pixel_width = 1080
-        config.pixel_height = 1920
-        super().__init__()
 
-    def construct(self):
-        self.camera.background_color = BLACK
-
-        def create_text(text, size=56):
-            return Text(
-                text,
-                font="Spectral",
-                font_size=size,
-                color=WHITE,
-                weight="NORMAL",
-                line_spacing=1.2
-            )
-
-        # Reveal text with a gentle typewriter effect and subtle scaling
-        def reveal_text(text_obj):
-            self.play(
-                AddTextLetterByLetter(text_obj, time_per_char=0.05),
-                text_obj.animate.scale(1.02),
-                run_time=2
-            )
-            self.play(
-                text_obj.animate.scale(1/1.02),
-                run_time=0.5
-            )
-
-        # Create your scenes here with alternate animation style
-        title = create_text("Kanpurgatory", size=72)
-        reveal_text(title)
-        self.wait(1)
-
-# Usage:
 if __name__ == "__main__":
-    # For main version:
     # manim -pql scene.py KanpurgatoryVideo
-    # For alternative style:
-    # manim -pql scene.py KanpurgatoryAlt
     pass
