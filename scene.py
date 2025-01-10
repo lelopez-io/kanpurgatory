@@ -1,30 +1,38 @@
 from manim import *
+from content import Content, Passage
 
 class KanpurgatoryVideo(Scene):
+    content: Content
     def __init__(self):
         # Vertical video configuration
         config.frame_width = 9.0
         config.frame_height = 16.0
         config.pixel_width = 1080
         config.pixel_height = 1920
+        self.content = Content()
         super().__init__()
 
-    def calculate_wait_time(self, text):
+    def calculate_wait_time(self, text_content):
         """Calculate wait time based on text length and complexity"""
         # Base time of 2 seconds
         base_time = 2
-        # Add 1.8 seconds per word
-        words = len(text.split())
-        word_time = words * 1.80
-        # Add small pause for line breaks
-        line_breaks = text.count('\n')
+        
+        # Split into words (handling both spaces and newlines)
+        words = [w for w in text_content.replace('\n', ' ').split(' ') if w.strip()]
+        word_time = len(words) * 1.80
+        
+        # Count actual line breaks
+        line_breaks = text_content.count('\n')
         break_time = line_breaks * 0.25
 
         total_time = min(base_time + word_time + break_time, 7.0)  # Cap at 7 seconds
         
-        print(f"\nText: {text}")
-        print(f"Words: {words} (adding {word_time:.2f}s)")
-        print(f"Line breaks: {line_breaks} (adding {break_time:.2f}s)")
+        print(f"\nText block analysis:")
+        print(f"Text: {text_content}")
+        print(f"Words ({len(words)}): {words}")
+        print(f"Word time: {word_time:.2f}s")
+        print(f"Line breaks ({line_breaks}): {break_time:.2f}s")
+        print(f"Base time: {base_time:.2f}s")
         print(f"Total time: {total_time:.2f}s")
         
         return total_time
@@ -65,8 +73,8 @@ class KanpurgatoryVideo(Scene):
         self.camera.background_color = BLACK
 
         # Title sequence
-        title = self.create_text_block("Kanpurgatory:")
-        subtitle = self.create_text_block("Field Notes from the In-Between")
+        title = self.create_text_block(self.content.title)
+        subtitle = self.create_text_block(self.content.subtitle)
 
         title.move_to(UP * 2)
         subtitle.next_to(title, DOWN, buff=0.5)
@@ -82,52 +90,34 @@ class KanpurgatoryVideo(Scene):
         )
         self.wait(2)
 
-        # Opening paragraph
-        opening = self.create_text_block(
-            "The endless horizon stretches\nbefore me like judgment day\nitself - flat, unforgiving,\neternal."
-        )
-
-        # Transition from title to first text
-        self.play(
-            FadeOut(title, shift=UP),
-            FadeOut(subtitle, shift=UP),
-            FadeIn(opening, shift=UP * 0.3),
-            run_time=1.5
-        )
-        self.wait(self.calculate_wait_time(opening.text))
-
-        # First passage
-        text1 = self.create_text_block(
-            "What should have been a\nsingle day's passage through\nKansas, transformed into a\nfour-day sentence in\nwinter's prison."
-        )
-
-        # Gentle fade between texts
-        self.fade_transform(opening, text1)
-        self.wait(self.calculate_wait_time(text1.text))
-
-        # Second passage with thematic emphasis
-        text2 = self.create_text_block(
-            "Here in this liminal space,\nwhere heaven meets earth\nin a razor-thin line,\nI discovered that purgatory\nisn't just a theological concept\n- it's a state of being."
-        )
-
-        self.fade_transform(text1, text2)
-        self.wait(self.calculate_wait_time(text2.text))
-
-        # Final contemplative line
-        text3 = self.create_text_block(
-            "Not quite damnation,\nnot quite salvation.\n\nJust... Kansas."
-        )
-
-        # Slower, more dramatic transition for the final revelation
-        self.play(
-            FadeOut(text2, shift=UP * 0.3, run_time=1.5),
-            FadeIn(text3, shift=UP * 0.3, run_time=1.5)
-        )
-        self.wait(self.calculate_wait_time(text3.text))
+        current_text = None
+        for i, passage in enumerate(self.content.passages):
+            next_text = self.create_text_block(passage.text)
+            
+            if current_text is None:
+                # First passage - transition from title
+                self.play(
+                    FadeOut(title, shift=UP),
+                    FadeOut(subtitle, shift=UP),
+                    FadeIn(next_text, shift=UP * 0.3),
+                    run_time=1.5
+                )
+            elif passage.next is None:
+                # Last passage - slower transition
+                self.play(
+                    FadeOut(current_text, shift=UP * 0.3, run_time=1.5),
+                    FadeIn(next_text, shift=UP * 0.3, run_time=1.5)
+                )
+            else:
+                # Middle passages - normal fade transform
+                self.fade_transform(current_text, next_text)
+            
+            self.wait(self.calculate_wait_time(passage.text))
+            current_text = next_text
 
         # Fade to black
         self.play(
-            FadeOut(text3, run_time=2)
+            FadeOut(current_text, run_time=2)
         )
         self.wait(1)
 
