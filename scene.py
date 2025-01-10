@@ -13,14 +13,21 @@ class KanpurgatoryVideo(Scene):
         """Calculate wait time based on text length and complexity"""
         # Base time of 2 seconds
         base_time = 2
-        # Add 0.15 seconds per word
+        # Add 1.8 seconds per word
         words = len(text.split())
         word_time = words * 1.80
         # Add small pause for line breaks
         line_breaks = text.count('\n')
         break_time = line_breaks * 0.25
 
-        return min(base_time + word_time + break_time, 8.0)  # Cap at 7 seconds
+        total_time = min(base_time + word_time + break_time, 7.0)  # Cap at 7 seconds
+        
+        print(f"\nText: {text}")
+        print(f"Words: {words} (adding {word_time:.2f}s)")
+        print(f"Line breaks: {line_breaks} (adding {break_time:.2f}s)")
+        print(f"Total time: {total_time:.2f}s")
+        
+        return total_time
 
     def create_text_block(self, text, opacity=1, margin=0.2):
         text_obj = Text(
