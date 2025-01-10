@@ -35,7 +35,7 @@ class Content:
             "theological concept - it's a",
             "state of being.",
             "",
-            "Not quite damnation,",
+            "Not quite damnation,|||",
             "not quite salvation.",
             "",
             "Just... Kansas."

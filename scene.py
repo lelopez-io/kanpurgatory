@@ -100,8 +100,12 @@ class KanpurgatoryVideo(VoiceoverScene):
         for passage in self.content.passages:
             next_text = self.create_text_block(passage.text)
 
-            # Replace ellipsis with spaced periods for voice but keep visual ellipsis
-            voice_text = passage.text.replace("...", " . . . ")
+            # Transform text for voice service
+            voice_text = (passage.text
+                         .replace("|||", " . . . ")  # Add pause for marker
+                         .replace("...", " . . . "))  # Regular ellipsis handling
+            # Transform text for display
+            display_text = passage.text.replace("|||", "")  # Remove markers for display
             with self.voiceover(text=voice_text) as tracker:
                 # Quick fade transition at the start (0.5 seconds)
                 if current_text is None:
