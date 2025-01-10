@@ -47,7 +47,7 @@ class KanpurgatoryVideo(VoiceoverScene):
 
     def create_text_block(self, text, opacity=1, margin=0.2):
         # Transform display text
-        display_text = text.replace("|||", "")  # Remove pause markers
+        display_text = text.replace("|||", "").replace("***", "")  # Remove all markers
 
         text_obj = Text(
             display_text,
@@ -106,7 +106,9 @@ class KanpurgatoryVideo(VoiceoverScene):
             # Transform text for voice service
             voice_text = (passage.text
                          .replace("|||", " . . . ")  # Add pause for marker
-                         .replace("...", " . . . "))  # Regular ellipsis handling
+                         .replace("...", " . . . ")  # Regular ellipsis handling
+                         .replace("***", ' " ')  # Add emphasis markers
+            )
             with self.voiceover(text=voice_text) as tracker:
                 # Quick fade transition at the start (0.5 seconds)
                 if current_text is None:
