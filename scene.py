@@ -9,8 +9,8 @@ class KanpurgatoryVideo(Scene):
         config.pixel_height = 1920
         super().__init__()
 
-    def create_text_block(self, text, size=48, opacity=1):
-        return Text(
+    def create_text_block(self, text, size=48, opacity=1, margin=0.2):
+        text_obj = Text(
             text,
             font="Spectral",
             font_size=size,
@@ -19,6 +19,19 @@ class KanpurgatoryVideo(Scene):
             opacity=opacity,
             line_spacing=1.2  # Increased line spacing for readability
         )
+        
+        # Get frame dimensions with custom margin
+        frame_width = config.frame_width * (1 - margin)
+        frame_height = config.frame_height * (1 - margin)
+        
+        # Scale down if text is too large
+        if text_obj.width > frame_width or text_obj.height > frame_height:
+            scale_factor_w = frame_width / text_obj.width
+            scale_factor_h = frame_height / text_obj.height
+            scale_factor = min(scale_factor_w, scale_factor_h)
+            text_obj.scale(scale_factor)
+        
+        return text_obj
 
     def fade_transform(self, old_text, new_text):
         """Smooth transition between text blocks"""
