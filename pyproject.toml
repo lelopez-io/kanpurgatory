@@ -12,8 +12,7 @@ numpy = "*"
 scipy = "*"
 python-dotenv = "*"
 llvmlite = ">=0.39.0"
-manim-voiceover = {version = "0.3.7", extras = ["elevenlabs", "transcribe"]}
-triton = "2.0.0"
+manim-voiceover = {version = "0.3.7", extras = ["elevenlabs"]}
 
 [build-system]
 requires = ["poetry-core"]
