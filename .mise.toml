@@ -1,0 +1,7 @@
+[tools]
+python = "3.12.7"
+poetry = "latest"
+rust = "latest"
+
+[env]
+POETRY_VIRTUALENVS_IN_PROJECT = "true"
