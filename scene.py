@@ -61,7 +61,8 @@ class KanpurgatoryVideo(VoiceoverScene):
             fill_opacity=1,
             stroke_width=0
         )
-        progress_bg.move_to([0, config.frame_height/2, 0])  # Position at very top
+        # Position at top edge
+        progress_bg.to_edge(UP, buff=0)
         
         # Create progress fill
         progress_fill = Rectangle(
@@ -72,7 +73,9 @@ class KanpurgatoryVideo(VoiceoverScene):
             stroke_width=0
         )
         progress_fill.align_to(progress_bg, LEFT)
-        progress_fill.move_to([progress_bg.get_left()[0], config.frame_height/2, 0])
+        # Position at top edge, aligned left
+        progress_fill.to_edge(UP, buff=0)
+        progress_fill.to_edge(LEFT, buff=0)
         
         # Create counter text
         counter_text = Text(
@@ -176,14 +179,24 @@ class KanpurgatoryVideo(VoiceoverScene):
 
                 # Animate progress arc during voiceover
                 # Animate the progress bar filling
-                bar_width = config.frame_width  # Full width
+                bar_width = config.frame_width
+                self.remove(progress_fill)  # Remove old progress
+                progress_fill = Rectangle(
+                    width=0,
+                    height=0.1,
+                    fill_color="#2B7CD4",
+                    fill_opacity=1,
+                    stroke_width=0
+                )
+                progress_fill.to_edge(UP, buff=0)
+                progress_fill.to_edge(LEFT, buff=0)
+                self.add(progress_fill)
+                
                 self.play(
-                    progress_fill.animate.stretch_to_fit_width(bar_width),
+                    progress_fill.animate.scale_to_fit_width(bar_width),
                     rate_func=linear,
                     run_time=tracker.duration - 0.5
                 )
-                # Reset progress fill for next passage
-                progress_fill.stretch_to_fit_width(0)
                 
                 # Add brief pause between passages
                 self.wait(0.5)  # 0.5 second pause between passages
