@@ -4,17 +4,28 @@ A Manim animation project that explores the liminal space of Kansas through poet
 
 ## Voice Configuration
 
-ElevenLabs voice ID for future use:
+ElevenLabs voice IDs:
+
+Production voice (planned):
 ```
 hyqpbxvsDwE0hQA0TcGB
 ```
-
 Voice: "Zig"
 - Deep, serious, young, soothing male voice
 - Midwest American accent
 - Ideal for audiobooks and narrative content
 - Character count: 143
 - Training size: 845K samples
+
+Development/testing voice:
+```
+nPczCjzI2devNBz1zQrb
+```
+Voice: "Brian"
+- Default voice profile
+- Deep, middle-aged male voice
+- American accent
+- Suitable for narration
 
 ## Dependencies
 
