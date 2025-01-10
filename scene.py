@@ -1,5 +1,5 @@
 from manim import *
-from content import Content, Passage
+from content import Content
 
 class KanpurgatoryVideo(Scene):
     content: Content
