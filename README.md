@@ -77,8 +77,15 @@ ELEVENLABS_API_KEY=your_api_key_here
 
 Generate the video:
 ```bash
-manim -pql scene.py KanpurgatoryVideo
+# Production mode (uses ElevenLabs API)
+VOICE_SERVICE=elevenlabs poetry run manim -pql scene.py KanpurgatoryVideo
+
+# Development mode (uses gTTS, no API calls)
+VOICE_SERVICE=gtts poetry run manim -pql scene.py KanpurgatoryVideo
 ```
+
+Note: VOICE_SERVICE environment variable is required and must be set to either 'gtts' or 'elevenlabs'.
+When using 'elevenlabs', the ELEVENLABS_API_KEY environment variable must also be set.
 
 ## Development Notes
 

@@ -20,18 +20,26 @@ class KanpurgatoryVideo(VoiceoverScene):
         # Load environment variables
         load_dotenv()
 
-        # Parse command line arguments
-        parser = argparse.ArgumentParser()
-        parser.add_argument('--dev', action='store_true', help='Use gTTS instead of ElevenLabs')
-        args, _ = parser.parse_known_args()
+        # Check required voice service selection
+        voice_service = os.getenv('VOICE_SERVICE')
+        if not voice_service:
+            raise ValueError("VOICE_SERVICE environment variable must be set to 'gtts' or 'elevenlabs'")
+        
+        voice_service = voice_service.lower()
+        if voice_service not in ['gtts', 'elevenlabs']:
+            raise ValueError("VOICE_SERVICE must be either 'gtts' or 'elevenlabs'")
 
-        # Initialize speech service based on mode
-        if args.dev:
+        # Initialize speech service based on selection
+        if voice_service == 'gtts':
             self.set_speech_service(GTTSService(lang="en", tld="com"))
         else:
+            api_key = os.getenv('ELEVENLABS_API_KEY')
+            if not api_key:
+                raise ValueError("ELEVENLABS_API_KEY environment variable is required when using elevenlabs service")
+            
             self.set_speech_service(
                 ElevenLabsService(
-                    api_key=os.getenv('ELEVENLABS_API_KEY'),
+                    api_key=api_key,
                     voice_id="nPczCjzI2devNBz1zQrb"  # Brian voice ID for testing
                 )
             )
