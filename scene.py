@@ -47,40 +47,42 @@ class KanpurgatoryVideo(VoiceoverScene):
             )
 
 
-    def create_progress_circle(self):
-        # Create progress circle in top right corner
-        # Create thinner outline circle
-        circle = Circle(radius=0.3, color=WHITE, stroke_width=2)
-        circle.set_fill(BLACK, opacity=1)
+    def create_progress_indicator(self):
+        # Create progress group
+        progress_group = VGroup()
         
-        # Create the progress circle that will fill
-        progress_circle = Circle(radius=0.3, color=BLUE_E, stroke_width=0)
-        progress_circle.set_fill(BLUE_E, opacity=0)
-        
-        # Create ArcBetweenPoints to animate fill
-        progress_arc = ArcBetweenPoints(
-            start=circle.point_from_proportion(0),
-            end=circle.point_from_proportion(0),
-            angle=0,
-            color=BLUE_E,
-            stroke_width=2
+        # Create progress bar background
+        bar_width = config.frame_width
+        bar_height = 0.1
+        progress_bg = Rectangle(
+            width=bar_width,
+            height=bar_height,
+            fill_color=BLACK,
+            fill_opacity=1,
+            stroke_width=0
         )
-        # Position in top right, leaving space for TikTok UI
-        circle.move_to([3.5, 6.5, 0])  # Moved higher up
+        progress_bg.move_to([0, config.frame_height/2, 0])  # Position at very top
         
-        # Add passage counter text with smaller font and padding
+        # Create progress fill
+        progress_fill = Rectangle(
+            width=0,  # Starts empty
+            height=bar_height,
+            fill_color="#2B7CD4",
+            fill_opacity=1,
+            stroke_width=0
+        )
+        progress_fill.align_to(progress_bg, LEFT)
+        progress_fill.move_to([progress_bg.get_left()[0], config.frame_height/2, 0])
+        
+        # Create counter text
         counter_text = Text(
             f"{self.current_passage + 1} / {self.total_passages}",
-            font_size=20,  # Smaller font
+            font_size=24,
             font="Spectral"
-        )
-        counter_text.move_to(circle.get_center())
-        # Scale the text to ensure it fits within circle with padding
-        padding = 0.7  # 70% of circle size
-        scale_factor = (circle.width * padding) / counter_text.width
-        counter_text.scale(scale_factor)
+        ).move_to([3.5, 7, 0])
         
-        return VGroup(circle, counter_text, progress_arc)
+        progress_group.add(progress_bg, progress_fill, counter_text)
+        return progress_group
 
     def create_text_block(self, text, opacity=1, margin=0.2):
         # Transform display text
@@ -143,11 +145,11 @@ class KanpurgatoryVideo(VoiceoverScene):
             # Update progress indicator
             if progress_group:
                 self.remove(progress_group)
-            progress_group = self.create_progress_circle()
+            progress_group = self.create_progress_indicator()
             self.add(progress_group)
             
-            # Get the progress arc from the group
-            progress_arc = progress_group[2]
+            # Get the progress fill rectangle
+            progress_fill = progress_group[1]
             next_text = self.create_text_block(passage.text)
 
             # Transform text for voice service
@@ -173,25 +175,15 @@ class KanpurgatoryVideo(VoiceoverScene):
                     )
 
                 # Animate progress arc during voiceover
-                # Animate the progress arc sweeping around
+                # Animate the progress bar filling
+                bar_width = config.frame_width  # Full width
                 self.play(
-                    Succession(
-                        UpdateFromAlphaFunc(
-                            progress_arc,
-                            lambda m, alpha: m.become(
-                                ArcBetweenPoints(
-                                    start=progress_group[0].point_from_proportion(0),
-                                    end=progress_group[0].point_from_proportion(alpha),
-                                    angle=alpha * TAU,
-                                    color=BLUE_E,
-                                    stroke_width=2
-                                ).move_to(progress_group[0].get_center())
-                            )
-                        )
-                    ),
+                    progress_fill.animate.stretch_to_fit_width(bar_width),
                     rate_func=linear,
                     run_time=tracker.duration - 0.5
                 )
+                # Reset progress fill for next passage
+                progress_fill.stretch_to_fit_width(0)
                 
                 # Add brief pause between passages
                 self.wait(0.5)  # 0.5 second pause between passages
