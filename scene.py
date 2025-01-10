@@ -92,6 +92,9 @@ class KanpurgatoryVideo(VoiceoverScene):
                 run_time=0.5
             )
             self.wait(tracker.duration - 0.5)
+            
+        # Add pause before starting passages
+        self.wait(1.0)
 
         current_text = None
         for passage in self.content.passages:
