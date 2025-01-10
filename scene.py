@@ -60,8 +60,9 @@ class KanpurgatoryVideo(VoiceoverScene):
         with self.voiceover(text=self.content.subtitle) as tracker:
             self.play(
                 FadeIn(subtitle, shift=UP * 0.3),
-                run_time=tracker.duration
+                run_time=0.5
             )
+            self.wait(tracker.duration - 0.5)
 
         current_text = None
         for passage in self.content.passages:
