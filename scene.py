@@ -82,7 +82,7 @@ class KanpurgatoryVideo(VoiceoverScene):
             f"{self.current_passage + 1} / {self.total_passages}",
             font_size=24,
             font="Spectral"
-        ).move_to([3.5, 7, 0])
+        ).to_edge(RIGHT, buff=0.5).to_edge(UP, buff=0.5)
         
         progress_group.add(progress_bg, progress_fill, counter_text)
         return progress_group
@@ -177,23 +177,11 @@ class KanpurgatoryVideo(VoiceoverScene):
                         run_time=0.5
                     )
 
-                # Animate progress arc during voiceover
                 # Animate the progress bar filling
                 bar_width = config.frame_width
-                self.remove(progress_fill)  # Remove old progress
-                progress_fill = Rectangle(
-                    width=0,
-                    height=0.1,
-                    fill_color="#2B7CD4",
-                    fill_opacity=1,
-                    stroke_width=0
-                )
-                progress_fill.to_edge(UP, buff=0)
-                progress_fill.to_edge(LEFT, buff=0)
-                self.add(progress_fill)
-                
+                progress_fill.set_width(0)  # Reset width
                 self.play(
-                    progress_fill.animate.scale_to_fit_width(bar_width),
+                    progress_fill.animate.set_width(bar_width),
                     rate_func=linear,
                     run_time=tracker.duration - 0.5
                 )
