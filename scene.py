@@ -9,6 +9,19 @@ class KanpurgatoryVideo(Scene):
         config.pixel_height = 1920
         super().__init__()
 
+    def calculate_wait_time(self, text):
+        """Calculate wait time based on text length and complexity"""
+        # Base time of 2 seconds
+        base_time = 2
+        # Add 0.15 seconds per word
+        words = len(text.split())
+        word_time = words * 0.15
+        # Add small pause for line breaks
+        line_breaks = text.count('\n')
+        break_time = line_breaks * 0.1
+        
+        return min(base_time + word_time + break_time, 7.0)  # Cap at 7 seconds
+    
     def create_text_block(self, text, opacity=1, margin=0.2):
         text_obj = Text(
             text,
@@ -74,7 +87,7 @@ class KanpurgatoryVideo(Scene):
             FadeIn(opening, shift=UP * 0.3),
             run_time=1.5
         )
-        self.wait(3)
+        self.wait(self.calculate_wait_time(opening.text))
 
         # First passage
         text1 = self.create_text_block(
@@ -83,7 +96,7 @@ class KanpurgatoryVideo(Scene):
 
         # Gentle fade between texts
         self.fade_transform(opening, text1)
-        self.wait(3)
+        self.wait(self.calculate_wait_time(text1.text))
 
         # Second passage with thematic emphasis
         text2 = self.create_text_block(
@@ -91,7 +104,7 @@ class KanpurgatoryVideo(Scene):
         )
 
         self.fade_transform(text1, text2)
-        self.wait(3)
+        self.wait(self.calculate_wait_time(text2.text))
 
         # Final contemplative line
         text3 = self.create_text_block(
@@ -103,7 +116,7 @@ class KanpurgatoryVideo(Scene):
             FadeOut(text2, shift=UP * 0.3, run_time=1.5),
             FadeIn(text3, shift=UP * 0.3, run_time=1.5)
         )
-        self.wait(3)
+        self.wait(self.calculate_wait_time(text3.text))
 
         # Fade to black
         self.play(
