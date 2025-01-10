@@ -17,7 +17,7 @@ class KanpurgatoryVideo(VoiceoverScene):
         super().__init__()
         # Load environment variables
         load_dotenv()
-        
+
         # Initialize ElevenLabs with Brian voice for testing
         self.set_speech_service(
             ElevenLabsService(
@@ -34,7 +34,7 @@ class KanpurgatoryVideo(VoiceoverScene):
             font_size=56,  # Default base size that will scale automatically
             color=WHITE,
             weight="NORMAL",
-            opacity=opacity,
+            fill_opacity=opacity,
             line_spacing=1.2  # Increased line spacing for readability
         )
 
@@ -94,7 +94,7 @@ class KanpurgatoryVideo(VoiceoverScene):
                         FadeIn(next_text, shift=UP * 0.3),
                         run_time=0.5
                     )
-                
+
                 # Wait for the voiceover to complete
                 self.wait(tracker.duration - 0.5)
 
