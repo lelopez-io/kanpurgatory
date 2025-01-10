@@ -66,7 +66,7 @@ source $(poetry env info --path)/bin/activate
 1. Create a `.env` file in the project root
 2. Add your ElevenLabs API key:
 ```
-ELEVENLABS_API_KEY=your_api_key_here
+ELEVEN_API_KEY=your_api_key_here
 ```
 
 ### Font Requirements
@@ -85,7 +85,7 @@ VOICE_SERVICE=gtts poetry run manim -pql scene.py KanpurgatoryVideo
 ```
 
 Note: VOICE_SERVICE environment variable is required and must be set to either 'gtts' or 'elevenlabs'.
-When using 'elevenlabs', the ELEVENLABS_API_KEY environment variable must also be set.
+When using 'elevenlabs', the ELEVEN_API_KEY environment variable must also be set.
 
 ## Development Notes
 

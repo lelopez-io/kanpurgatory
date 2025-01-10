@@ -33,9 +33,9 @@ class KanpurgatoryVideo(VoiceoverScene):
         if voice_service == 'gtts':
             self.set_speech_service(GTTSService(lang="en", tld="com"))
         else:
-            api_key = os.getenv('ELEVENLABS_API_KEY')
+            api_key = os.getenv('ELEVEN_API_KEY')
             if not api_key:
-                raise ValueError("ELEVENLABS_API_KEY environment variable is required when using elevenlabs service")
+                raise ValueError("ELEVEN_API_KEY environment variable is required when using elevenlabs service")
             
             self.set_speech_service(
                 ElevenLabsService(
