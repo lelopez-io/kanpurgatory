@@ -56,13 +56,6 @@ class KanpurgatoryVideo(VoiceoverScene):
 
         return text_obj
 
-    def fade_transform(self, old_text, new_text):
-        """Smooth transition between text blocks"""
-        self.play(
-            FadeOut(old_text, shift=UP * 0.3, run_time=1),
-            FadeIn(new_text, shift=UP * 0.3, run_time=1)
-        )
-
     def construct(self):
         # Set background color
         self.camera.background_color = BLACK
@@ -97,18 +90,19 @@ class KanpurgatoryVideo(VoiceoverScene):
                         FadeOut(title, shift=UP),
                         FadeOut(subtitle, shift=UP),
                         FadeIn(next_text, shift=UP * 0.3),
-                        run_time=tracker.duration
+                        run_time=min(tracker.duration * 0.3, 1.0)  # Quick transition
                     )
-                elif passage.next is None:
-                    # Last passage - slower transition
+                else:
+                    # All other passages - synchronized fade transform
                     self.play(
                         FadeOut(current_text, shift=UP * 0.3),
                         FadeIn(next_text, shift=UP * 0.3),
-                        run_time=tracker.duration
+                        run_time=min(tracker.duration * 0.3, 1.0)  # Quick transition
                     )
-                else:
-                    # Middle passages - normal fade transform
-                    self.fade_transform(current_text, next_text)
+                
+                # Wait for the remainder of the voiceover
+                remaining_time = max(0, tracker.duration - (tracker.duration * 0.3))
+                self.wait(remaining_time)
 
             current_text = next_text
 
