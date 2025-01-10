@@ -37,11 +37,17 @@ brew install py3cairo ffmpeg pango pkg-config scipy sox llvm
 
 ### Environment Setup
 ```bash
+# Set Python build configuration
+export PYTHON_CONFIGURE_OPTS="--enable-shared"
+export PYTHON_INCLUDE_DIR=$(mise where python)/include/python3.11
+export PYTHON_LIBRARY=$(mise where python)/lib/libpython3.11.dylib
+export PKG_CONFIG_PATH="$(mise where python)/lib/pkgconfig:/opt/homebrew/lib/pkgconfig"
+export CFLAGS="-I$(mise where python)/include/python3.11"
+
 # Add LLVM to your path and set required environment variables
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib -L/opt/homebrew/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include -I/opt/homebrew/include"
 ```
 
 ### Development Environment
