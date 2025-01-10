@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "kanpurgatory"
+version = "0.1.0"
+description = "A Manim animation project exploring the liminal space of Kansas through poetry and animation"
+authors = ["Your Name <your.email@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+manim = "*"
+numpy = "*"
+scipy = "*"
+python-dotenv = "*"
+manim-voiceover = {extras = ["elevenlabs", "azure", "gtts", "transcribe"], version = "*"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
