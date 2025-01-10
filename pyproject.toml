@@ -11,6 +11,7 @@ numpy = "*"
 scipy = "*"
 python-dotenv = "*"
 llvmlite = ">=0.39.0"
+triton = "1.0.0"
 manim-voiceover = {extras = ["elevenlabs", "azure", "gtts", "transcribe"], version = "*"}
 
 [build-system]
