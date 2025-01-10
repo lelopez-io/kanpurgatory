@@ -113,8 +113,10 @@ class KanpurgatoryVideo(VoiceoverScene):
                         run_time=0.5
                     )
 
-                # Wait for the voiceover to complete
+                # Wait for the voiceover to complete plus extra pause
                 self.wait(tracker.duration - 0.5)
+                # Add brief pause between passages
+                self.wait(0.5)  # 0.5 second pause between passages
 
             current_text = next_text
 
