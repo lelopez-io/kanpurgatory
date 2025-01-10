@@ -16,11 +16,7 @@ class Content:
         "Here in this liminal space,\nwhere heaven meets earth\nin a razor-thin line,\nI discovered that purgatory\nisn't just a theological concept\n- it's a state of being.",
         "Not quite damnation,\nnot quite salvation.\n\nJust... Kansas."
     )
-    passages: list[Passage] = None
-
-    def __post_init__(self):
-        if self.passages is None:
-            self.passages = [Passage(text) for text in self.story]
-            # Set next references
-            for i in range(len(self.passages) - 1):
-                self.passages[i].next = self.passages[i + 1]
+    passages: tuple[Passage, ...] = tuple(
+        Passage(text, next=None if i == len(story) - 1 else Passage(story[i + 1]))
+        for i, text in enumerate(story)
+    )
