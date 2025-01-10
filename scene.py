@@ -1,7 +1,9 @@
 from manim import *
 from manim_voiceover import VoiceoverScene
-from manim_voiceover.services.gtts import GTTSService
+from manim_voiceover.services.elevenlabs import ElevenLabsService
 from content import Content
+from dotenv import load_dotenv
+import os
 
 class KanpurgatoryVideo(VoiceoverScene):
     content: Content
@@ -13,7 +15,16 @@ class KanpurgatoryVideo(VoiceoverScene):
         config.pixel_height = 1920
         self.content = Content()
         super().__init__()
-        self.set_speech_service(GTTSService(lang="en", tld="com"))
+        # Load environment variables
+        load_dotenv()
+        
+        # Initialize ElevenLabs with Brian voice for testing
+        self.set_speech_service(
+            ElevenLabsService(
+                api_key=os.getenv('ELEVENLABS_API_KEY'),
+                voice="nPczCjzI2devNBz1zQrb"  # Brian voice ID for testing
+            )
+        )
 
 
     def create_text_block(self, text, opacity=1, margin=0.2):
