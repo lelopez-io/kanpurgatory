@@ -59,7 +59,7 @@ mise install
 poetry install
 
 # Activate the virtual environment
-poetry env shell
+source $(poetry env info --path)/bin/activate
 ```
 
 ### Configuration
