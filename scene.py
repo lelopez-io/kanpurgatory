@@ -49,8 +49,22 @@ class KanpurgatoryVideo(VoiceoverScene):
 
     def create_progress_circle(self):
         # Create progress circle in top right corner
-        circle = Circle(radius=0.3, color=WHITE)
+        # Create thinner outline circle
+        circle = Circle(radius=0.3, color=WHITE, stroke_width=2)
         circle.set_fill(BLACK, opacity=1)
+        
+        # Create the progress circle that will fill
+        progress_circle = Circle(radius=0.3, color=BLUE_E, stroke_width=0)
+        progress_circle.set_fill(BLUE_E, opacity=0)
+        
+        # Create ArcBetweenPoints to animate fill
+        progress_arc = ArcBetweenPoints(
+            start=circle.point_from_proportion(0),
+            end=circle.point_from_proportion(0),
+            angle=0,
+            color=BLUE_E,
+            stroke_width=2
+        )
         # Position in top right, leaving space for TikTok UI
         circle.move_to([3.5, 6.5, 0])  # Moved higher up
         
@@ -66,7 +80,7 @@ class KanpurgatoryVideo(VoiceoverScene):
         scale_factor = (circle.width * padding) / counter_text.width
         counter_text.scale(scale_factor)
         
-        return VGroup(circle, counter_text)
+        return VGroup(circle, counter_text, progress_arc)
 
     def create_text_block(self, text, opacity=1, margin=0.2):
         # Transform display text
@@ -132,14 +146,8 @@ class KanpurgatoryVideo(VoiceoverScene):
             progress_group = self.create_progress_circle()
             self.add(progress_group)
             
-            # Create progress arc for animation
-            progress_arc = Arc(
-                radius=0.3,
-                angle=0,
-                color=WHITE,
-                stroke_width=3
-            )
-            progress_arc.move_to([3.5, 6.5, 0])  # Match circle position
+            # Get the progress arc from the group
+            progress_arc = progress_group[2]
             next_text = self.create_text_block(passage.text)
 
             # Transform text for voice service
@@ -165,8 +173,22 @@ class KanpurgatoryVideo(VoiceoverScene):
                     )
 
                 # Animate progress arc during voiceover
+                # Animate the progress arc sweeping around
                 self.play(
-                    progress_arc.animate.set_angle(TAU),
+                    Succession(
+                        UpdateFromAlphaFunc(
+                            progress_arc,
+                            lambda m, alpha: m.become(
+                                ArcBetweenPoints(
+                                    start=progress_group[0].point_from_proportion(0),
+                                    end=progress_group[0].point_from_proportion(alpha),
+                                    angle=alpha * TAU,
+                                    color=BLUE_E,
+                                    stroke_width=2
+                                ).move_to(progress_group[0].get_center())
+                            )
+                        )
+                    ),
                     rate_func=linear,
                     run_time=tracker.duration - 0.5
                 )
