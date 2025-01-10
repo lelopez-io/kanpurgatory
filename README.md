@@ -41,6 +41,7 @@ brew install py3cairo ffmpeg pango pkg-config scipy sox llvm
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+
 ```
 
 ### Development Environment
