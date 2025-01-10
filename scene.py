@@ -68,25 +68,23 @@ class KanpurgatoryVideo(VoiceoverScene):
             next_text = self.create_text_block(passage.text)
 
             with self.voiceover(text=passage.text) as tracker:
+                # Quick fade transition at the start (0.5 seconds)
                 if current_text is None:
-                    # First passage - transition from title
                     self.play(
                         FadeOut(title, shift=UP),
                         FadeOut(subtitle, shift=UP),
                         FadeIn(next_text, shift=UP * 0.3),
-                        run_time=min(tracker.duration * 0.3, 1.0)  # Quick transition
+                        run_time=0.5
                     )
                 else:
-                    # All other passages - synchronized fade transform
                     self.play(
                         FadeOut(current_text, shift=UP * 0.3),
                         FadeIn(next_text, shift=UP * 0.3),
-                        run_time=min(tracker.duration * 0.3, 1.0)  # Quick transition
+                        run_time=0.5
                     )
                 
-                # Wait for the remainder of the voiceover
-                remaining_time = max(0, tracker.duration - (tracker.duration * 0.3))
-                self.wait(remaining_time)
+                # Wait for the voiceover to complete
+                self.wait(tracker.duration - 0.5)
 
             current_text = next_text
 
