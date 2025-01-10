@@ -1,7 +1,9 @@
 from manim import *
+from manim_voiceover import VoiceoverScene
+from manim_voiceover.services.gtts import GTTSService
 from content import Content
 
-class KanpurgatoryVideo(Scene):
+class KanpurgatoryVideo(VoiceoverScene):
     content: Content
     def __init__(self):
         # Vertical video configuration
@@ -11,6 +13,7 @@ class KanpurgatoryVideo(Scene):
         config.pixel_height = 1920
         self.content = Content()
         super().__init__()
+        self.set_speech_service(GTTSService(lang="en", tld="com"))
 
     def calculate_wait_time(self, text_content):
         """Calculate wait time based on text length and complexity"""
@@ -71,48 +74,48 @@ class KanpurgatoryVideo(Scene):
         title.move_to(UP * 2)
         subtitle.next_to(title, DOWN, buff=0.5)
 
-        # Fade in title with letter reveal
-        self.play(
-            AddTextLetterByLetter(title, run_time=2),
-            rate_func=linear
-        )
-        self.play(
-            FadeIn(subtitle, shift=UP * 0.3),
-            run_time=1.5
-        )
-        self.wait(2)
+        with self.voiceover(text=self.content.title) as tracker:
+            self.play(
+                AddTextLetterByLetter(title),
+                run_time=tracker.duration
+            )
+
+        with self.voiceover(text=self.content.subtitle) as tracker:
+            self.play(
+                FadeIn(subtitle, shift=UP * 0.3),
+                run_time=tracker.duration
+            )
 
         current_text = None
-        for i, passage in enumerate(self.content.passages):
+        for passage in self.content.passages:
             next_text = self.create_text_block(passage.text)
 
-            if current_text is None:
-                # First passage - transition from title
-                self.play(
-                    FadeOut(title, shift=UP),
-                    FadeOut(subtitle, shift=UP),
-                    FadeIn(next_text, shift=UP * 0.3),
-                    run_time=1.5
-                )
-            elif passage.next is None:
-                # Last passage - slower transition
-                self.play(
-                    FadeOut(current_text, shift=UP * 0.3, run_time=1.5),
-                    FadeIn(next_text, shift=UP * 0.3, run_time=1.5)
-                )
-            else:
-                # Middle passages - normal fade transform
-                self.fade_transform(current_text, next_text)
+            with self.voiceover(text=passage.text) as tracker:
+                if current_text is None:
+                    # First passage - transition from title
+                    self.play(
+                        FadeOut(title, shift=UP),
+                        FadeOut(subtitle, shift=UP),
+                        FadeIn(next_text, shift=UP * 0.3),
+                        run_time=tracker.duration
+                    )
+                elif passage.next is None:
+                    # Last passage - slower transition
+                    self.play(
+                        FadeOut(current_text, shift=UP * 0.3),
+                        FadeIn(next_text, shift=UP * 0.3),
+                        run_time=tracker.duration
+                    )
+                else:
+                    # Middle passages - normal fade transform
+                    self.fade_transform(current_text, next_text)
 
-            self.add_sound(passage.audio_file)
-            self.wait(self.calculate_wait_time(passage.text))
             current_text = next_text
 
         # Fade to black
         self.play(
             FadeOut(current_text, run_time=2)
         )
-        self.wait(1)
 
 
 if __name__ == "__main__":
