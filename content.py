@@ -15,24 +15,26 @@ class Content:
             "The endless horizon stretches",
             "before me like judgment day",
             "itself - flat, unforgiving,",
-            "eternal."
-        ),
-        (
-            "What should have been a",
-            "single day's passage through",
-            "Kansas, transformed into a",
-            "four-day sentence in",
-            "winter's prison."
+            "eternal. What should have",
+            "been a single day's passage",
+            "through Kansas, as we made",
+            "our way from Houston to Boulder,",
+            "transformed into a four-day",
+            "sentence in winter's prison.",
+            "Trapped between intention and",
+            "arrival, freezing rain and",
+            "blizzards conspired to hold us",
+            "in this vast waiting room of",
+            "the Great Plains."
         ),
         (
             "Here in this liminal space,",
-            "where heaven meets earth",
-            "in a razor-thin line,",
-            "I discovered that purgatory",
-            "isn't just a theological concept",
-            "- it's a state of being."
-        ),
-        (
+            "where heaven meets earth in a",
+            "razor-thin line, I discovered",
+            "that purgatory isn't just a",
+            "theological concept - it's a",
+            "state of being.",
+            "",
             "Not quite damnation,",
             "not quite salvation.",
             "",
