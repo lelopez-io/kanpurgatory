@@ -44,7 +44,7 @@ mise install
 poetry install
 
 # Activate the virtual environment
-poetry shell
+poetry env shell
 ```
 
 ### Configuration
