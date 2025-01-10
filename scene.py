@@ -15,22 +15,6 @@ class KanpurgatoryVideo(VoiceoverScene):
         super().__init__()
         self.set_speech_service(GTTSService(lang="en", tld="com"))
 
-    def calculate_wait_time(self, text_content):
-        """Calculate wait time based on text length and complexity"""
-        # Base time of 2 seconds
-        base_time = 2.2
-
-        # Split into words (handling both spaces and newlines)
-        words = [w for w in text_content.replace('\n', ' ').split(' ') if w.strip()]
-        word_time = len(words) * 0.08
-
-        # Count actual line breaks
-        line_breaks = text_content.count('\n')
-        break_time = line_breaks * 0.02
-
-        total_time = min(base_time + word_time + break_time, 7.0)  # Cap at 7 seconds
-
-        return total_time
 
     def create_text_block(self, text, opacity=1, margin=0.2):
         text_obj = Text(
