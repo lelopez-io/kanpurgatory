@@ -39,10 +39,13 @@ class Content:
             "Just... Kansas."
         )
     )
-    passages: tuple[Passage, ...] = tuple(
-        Passage(
-            "\n".join(lines),
-            next=None if i == len(story) - 1 else Passage("\n".join(story[i + 1]))
+    passages: tuple[Passage, ...] = None
+
+    def __post_init__(self):
+        self.passages = tuple(
+            Passage(
+                "\n".join(lines),
+                next=None if i == len(self.story) - 1 else Passage("\n".join(self.story[i + 1]))
+            )
+            for i, lines in enumerate(self.story)
         )
-        for i, lines in enumerate(story)
-    )
