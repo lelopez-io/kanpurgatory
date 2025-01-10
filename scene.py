@@ -15,13 +15,13 @@ class KanpurgatoryVideo(Scene):
         base_time = 2
         # Add 0.15 seconds per word
         words = len(text.split())
-        word_time = words * 0.15
+        word_time = words * 1.80
         # Add small pause for line breaks
         line_breaks = text.count('\n')
-        break_time = line_breaks * 0.1
-        
-        return min(base_time + word_time + break_time, 7.0)  # Cap at 7 seconds
-    
+        break_time = line_breaks * 0.25
+
+        return min(base_time + word_time + break_time, 8.0)  # Cap at 7 seconds
+
     def create_text_block(self, text, opacity=1, margin=0.2):
         text_obj = Text(
             text,
