@@ -16,6 +16,8 @@ class KanpurgatoryVideo(VoiceoverScene):
         config.pixel_width = 1080
         config.pixel_height = 1920
         self.content = Content()
+        self.total_passages = len(self.content.passages)
+        self.current_passage = 0
         super().__init__()
         # Load environment variables
         load_dotenv()
@@ -44,6 +46,27 @@ class KanpurgatoryVideo(VoiceoverScene):
                 )
             )
 
+
+    def create_progress_circle(self):
+        # Create progress circle in top right corner
+        circle = Circle(radius=0.3, color=WHITE)
+        circle.set_fill(BLACK, opacity=1)
+        # Position in top right, leaving space for TikTok UI
+        circle.move_to([3.5, 6.5, 0])  # Moved higher up
+        
+        # Add passage counter text with smaller font and padding
+        counter_text = Text(
+            f"{self.current_passage + 1} / {self.total_passages}",
+            font_size=20,  # Smaller font
+            font="Spectral"
+        )
+        counter_text.move_to(circle.get_center())
+        # Scale the text to ensure it fits within circle with padding
+        padding = 0.7  # 70% of circle size
+        scale_factor = (circle.width * padding) / counter_text.width
+        counter_text.scale(scale_factor)
+        
+        return VGroup(circle, counter_text)
 
     def create_text_block(self, text, opacity=1, margin=0.2):
         # Transform display text
@@ -100,7 +123,23 @@ class KanpurgatoryVideo(VoiceoverScene):
         self.wait(1.0)
 
         current_text = None
+        progress_group = None
+        
         for passage in self.content.passages:
+            # Update progress indicator
+            if progress_group:
+                self.remove(progress_group)
+            progress_group = self.create_progress_circle()
+            self.add(progress_group)
+            
+            # Create progress arc for animation
+            progress_arc = Arc(
+                radius=0.3,
+                angle=0,
+                color=WHITE,
+                stroke_width=3
+            )
+            progress_arc.move_to([3.5, 6.5, 0])  # Match circle position
             next_text = self.create_text_block(passage.text)
 
             # Transform text for voice service
@@ -125,10 +164,18 @@ class KanpurgatoryVideo(VoiceoverScene):
                         run_time=0.5
                     )
 
-                # Wait for the voiceover to complete plus extra pause
-                self.wait(tracker.duration - 0.5)
+                # Animate progress arc during voiceover
+                self.play(
+                    progress_arc.animate.set_angle(TAU),
+                    rate_func=linear,
+                    run_time=tracker.duration - 0.5
+                )
+                
                 # Add brief pause between passages
                 self.wait(0.5)  # 0.5 second pause between passages
+                
+                # Update passage counter for next iteration
+                self.current_passage += 1
 
             current_text = next_text
 
