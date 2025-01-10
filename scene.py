@@ -16,17 +16,17 @@ class KanpurgatoryVideo(Scene):
         """Calculate wait time based on text length and complexity"""
         # Base time of 2 seconds
         base_time = 2
-        
+
         # Split into words (handling both spaces and newlines)
         words = [w for w in text_content.replace('\n', ' ').split(' ') if w.strip()]
-        word_time = len(words) * 1.80
-        
+        word_time = len(words) * 0.10
+
         # Count actual line breaks
         line_breaks = text_content.count('\n')
-        break_time = line_breaks * 0.25
+        break_time = line_breaks * 0.05
 
         total_time = min(base_time + word_time + break_time, 7.0)  # Cap at 7 seconds
-        
+
         print(f"\nText block analysis:")
         print(f"Text: {text_content}")
         print(f"Words ({len(words)}): {words}")
@@ -34,7 +34,7 @@ class KanpurgatoryVideo(Scene):
         print(f"Line breaks ({line_breaks}): {break_time:.2f}s")
         print(f"Base time: {base_time:.2f}s")
         print(f"Total time: {total_time:.2f}s")
-        
+
         return total_time
 
     def create_text_block(self, text, opacity=1, margin=0.2):
@@ -93,7 +93,7 @@ class KanpurgatoryVideo(Scene):
         current_text = None
         for i, passage in enumerate(self.content.passages):
             next_text = self.create_text_block(passage.text)
-            
+
             if current_text is None:
                 # First passage - transition from title
                 self.play(
@@ -111,7 +111,7 @@ class KanpurgatoryVideo(Scene):
             else:
                 # Middle passages - normal fade transform
                 self.fade_transform(current_text, next_text)
-            
+
             self.wait(self.calculate_wait_time(passage.text))
             current_text = next_text
 
