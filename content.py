@@ -315,10 +315,10 @@ class Content:
 
         self.passages = tuple(
             Passage(
-                text="\n".join(lines),  # Keep original formatting for display
-                voice_text=format_voice_text(lines),  # Smooth format for voice
+                display_text=format_display_text(lines),  # Cleanup formatting for display
+                voice_text=format_voice_text(lines),  # Enhance format for voice
                 next=None if i == len(self.story) - 1 else Passage(
-                    text="\n".join(self.story[i + 1]),
+                    display_text=format_display_text(self.story[i + 1]),
                     voice_text=format_voice_text(self.story[i + 1])
                 )
             )
