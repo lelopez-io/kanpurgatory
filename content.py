@@ -225,7 +225,7 @@ class Content:
             "meteorological divination,",
             "consulting AI to decipher the",
             "National Weather Service's",
-            "cryptic forecasts, determined",
+            "cryptic forecasts,||| determined",
             "not to be caught in such",
             "limbo again."
         ),
