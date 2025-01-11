@@ -73,13 +73,15 @@ class Content:
         # First casualty
         (
             "The rain crystallized upon",
-            "impact, turning every surface",
-            "into a mirror of our mounting",
-            "uncertainty. Despite our careful",
-            "choreography around the vehicle",
-            "under the covered port,|||",
-            "the ice claimed my wife as",
-            "its first victim."
+            "impact, each drop a betrayal",
+            "of physics. Even under the",
+            "covered port, our careful",
+            "steps proved futile|||",
+            "",
+            "The ice claimed my wife",
+            "with casual cruelty|||",
+            "her fall shattering our",
+            "illusion of control."
         ),
         # The thunder
         (
