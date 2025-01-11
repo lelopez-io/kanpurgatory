@@ -46,30 +46,29 @@ class KanpurgatoryVideo(VoiceoverScene):
                 )
             )
 
-
     def create_progress_bar(self):
         # Create progress bar at the very top
-        bar_height = 0.1
+        bar_height = 0.2  # Increased height for visibility
         
-        # Background bar
-        bg = Rectangle(
+        # Yellow background bar (will be revealed)
+        yellow_bar = Rectangle(
             width=config.frame_width,
             height=bar_height,
-            fill_color=BLACK,
+            fill_color=YELLOW,
             fill_opacity=1,
             stroke_width=0
         ).to_edge(UP, buff=0)
         
-        # Progress fill
-        fill = Rectangle(
-            width=0,
+        # White overlay bar that will shrink
+        white_bar = Rectangle(
+            width=config.frame_width,
             height=bar_height,
-            fill_color="#2B7CD4",
+            fill_color=WHITE,
             fill_opacity=1,
             stroke_width=0
-        ).to_edge(UP, buff=0).to_edge(LEFT, buff=0)
+        ).to_edge(UP, buff=0)
         
-        return VGroup(bg, fill)
+        return VGroup(yellow_bar, white_bar)
     
     def create_passage_counter(self):
         # Create counter text in top right
@@ -149,16 +148,17 @@ class KanpurgatoryVideo(VoiceoverScene):
             self.add(progress_bar)
             self.add(passage_counter)
             
-            # Get progress fill for animation
-            progress_fill = progress_bar[1]
+            # Get white overlay bar for animation
+            white_overlay = progress_bar[1]  # Second element is the white bar
             next_text = self.create_text_block(passage.text)
 
             # Transform text for voice service
             voice_text = (passage.text
-                         .replace("|||", " . . . ")  # Add pause for marker
-                         .replace("...", " . . . ")  # Regular ellipsis handling
-                         .replace("***", ' "" ')  # Add emphasis markers
+                         .replace("|||", " . . . ")
+                         .replace("...", " . . . ")
+                         .replace("***", ' "" ')
             )
+            
             with self.voiceover(text=voice_text) as tracker:
                 # Quick fade transition at the start (0.5 seconds)
                 if current_text is None:
@@ -175,11 +175,10 @@ class KanpurgatoryVideo(VoiceoverScene):
                         run_time=0.5
                     )
 
-                # Animate the progress bar filling
-                bar_width = config.frame_width
-                progress_fill.set_width(0)  # Reset width
+                # Animate the white overlay shrinking to reveal yellow bar
+                original_width = white_overlay.width
                 self.play(
-                    progress_fill.animate.set_width(bar_width),
+                    white_overlay.animate.set_width(0).align_to(progress_bar, RIGHT),  # Shrink from right to left
                     rate_func=linear,
                     run_time=tracker.duration - 0.5
                 )
