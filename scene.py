@@ -11,6 +11,10 @@ import argparse
 class KanpurgatoryVideo(VoiceoverScene):
     content: Content
     def __init__(self):
+        # Set assets directory before any other configuration
+        project_root = Path(__file__).parent
+        config.assets_dir = str(project_root / "assets")
+
         # Vertical video configuration
         config.frame_width = 9.0
         config.frame_height = 16.0
@@ -23,7 +27,7 @@ class KanpurgatoryVideo(VoiceoverScene):
         # Load environment variables
         load_dotenv()
 
-        # Print asset directory location
+        # Print asset directory location for debugging
         print(f"Assets directory: {config.get_dir('assets_dir')}")
         
         # Check if SVG exists
@@ -61,14 +65,22 @@ class KanpurgatoryVideo(VoiceoverScene):
         bar_width = config.frame_width
         
         try:
-            # Try to load the SVG with absolute path
-            svg_path = Path(config.get_dir('assets_dir')) / "progress-gradient.svg"
-            print(f"Loading SVG from: {svg_path}")
+            # Get absolute path to SVG file
+            svg_path = os.path.abspath(os.path.join(
+                config.get_dir('assets_dir'),
+                "progress-gradient.svg"
+            ))
+            print(f"Loading SVG from absolute path: {svg_path}")
             
+            # Verify file exists before attempting to load
+            if not os.path.exists(svg_path):
+                raise FileNotFoundError(f"SVG file not found at {svg_path}")
+                
             gradient_bar = SVGMobject(
-                str(svg_path),  # Convert Path to string
+                file_name=svg_path,  # Pass the absolute path as string
                 height=bar_height,
-                width=bar_width
+                width=bar_width,
+                stroke_width=0  # No stroke for clean edges
             )
         except Exception as e:
             print(f"Error loading SVG: {e}")
@@ -95,7 +107,7 @@ class KanpurgatoryVideo(VoiceoverScene):
         bar_group.move_to([0, config.frame_height/2 - bar_height/2, 0])  # Precise positioning at top
         
         return bar_group
-    
+
     def create_passage_counter(self):
         # Create counter text in top right
         return Text(
