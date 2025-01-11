@@ -182,9 +182,8 @@ class KanpurgatoryVideo(VoiceoverScene):
                     )
 
                 # Animate the white overlay shrinking to reveal yellow bar
-                original_width = white_overlay.width
                 self.play(
-                    white_overlay.animate.set_width(0).align_to(progress_bar, RIGHT),  # Shrink from right to left
+                    white_overlay.animate.stretch_to_fit_width(0).align_to(progress_bar, RIGHT),  # Shrink width only
                     rate_func=linear,
                     run_time=tracker.duration - 0.5
                 )
