@@ -51,28 +51,13 @@ class KanpurgatoryVideo(VoiceoverScene):
         bar_height = 0.2  # Increased height for visibility
         bar_width = config.frame_width
         
-        # Create gradient background using VMobject for gradient fill
-        gradient_bar = VMobject()
-        gradient_bar.set_points_as_corners([
-            [-bar_width/2, -bar_height/2, 0],  # Bottom left
-            [bar_width/2, -bar_height/2, 0],   # Bottom right
-            [bar_width/2, bar_height/2, 0],    # Top right
-            [-bar_width/2, bar_height/2, 0],   # Top left
-            [-bar_width/2, -bar_height/2, 0],  # Back to start
-        ])
-        
-        # Apply gradient fill
-        gradient_bar.set_fill(opacity=1)
-        gradient_bar.set_style(
-            fill_color=None,
+        # Create gradient background using Rectangle
+        gradient_bar = Rectangle(
+            width=bar_width,
+            height=bar_height,
             fill_opacity=1,
             stroke_width=0,
-            stroke_opacity=0,
-            background_stroke_width=0,
-            background_stroke_opacity=0,
-        )
-        colors = ["#1E3D59", "#4B2D84", "#9B4DCA"]  # Dark blue to purple to mystical purple
-        gradient_bar.set_color_by_gradient(*colors)
+        ).set_color_by_gradient(BLUE_D, PURPLE_A, "#9B4DCA")
         
         # Create black overlay
         black_bar = Rectangle(
@@ -81,7 +66,6 @@ class KanpurgatoryVideo(VoiceoverScene):
             fill_color=BLACK,
             fill_opacity=1,
             stroke_width=0,
-            stroke_opacity=0
         )
         
         # Create group and position it
@@ -89,7 +73,6 @@ class KanpurgatoryVideo(VoiceoverScene):
         bar_group.move_to([0, config.frame_height/2 - bar_height/2, 0])  # Precise positioning at top
         
         return bar_group
-    
     def create_passage_counter(self):
         # Create counter text in top right
         return Text(
