@@ -169,19 +169,22 @@ class Content:
         ),
         # False hope
         (
-            "Hope appeared briefly in the",
-            "form of a mini dozer clearing",
-            "snow at the neighboring",
-            "restaurant. Yet when approached",
-            "with our plea - several vehicles",
-            "seeking liberation, with offers",
-            "of payment for assistance -",
-            "the operator revealed another",
-            "layer of this purgatorial",
-            "bureaucracy.",
+            "A glimmer of hope appeared -",
+            "a mini dozer clearing snow",
+            "at the neighboring restaurant.",
+            "Wading through knee-deep",
+            "drifts to negotiate our",
+            "freedom, we offered payment",
+            "to free our vehicles from",
+            "their frozen prison.",
             "",
-            "He refused on principle|||",
-            "citing past payment disputes."
+            "However, the operator revealed",
+            "another layer of this",
+            "purgatorial bureaucracy.",
+            "",
+            "He refused to help|||",
+            "citing past disputes with",
+            "the hotel owner."
         ),
         # Texas comparison
         (
@@ -253,14 +256,14 @@ class Content:
         ),
         # The contrast
         (
-            "The contrast was immediate",
-            "and telling - smooth sailing",
-            "all the way home, though by",
-            "then exhaustion had settled",
+            "The contrast was immediate -",
+            "clear roads stretched before",
+            "us like a welcome reprieve.",
+            "Yet exhaustion had settled",
             "deep in my bones from what",
-            "had been the most stressful",
-            "drive I'd ever experienced",
-            "on essentially flat roads."
+            "remained the most stressful",
+            "drive I'd ever experienced,",
+            "all on essentially flat roads."
         ),
         # Final reflection
         (
