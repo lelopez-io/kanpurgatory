@@ -41,7 +41,7 @@ class Content:
             "Not quite damnation,|||",
             "not quite salvation.",
             "",
-            "***Just***... Kansas."
+            "***Just***... Kansas.|||"
         ),
         # The descent
         (
