@@ -264,6 +264,7 @@ class Content:
             "between departure and",
             "destination discovers the",
             "true meaning of limbo.",
+            "",
             "In our case, it",
             "was a four-day lesson in",
             "patience, community, and the",
