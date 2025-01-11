@@ -244,7 +244,7 @@ class Content:
             "",
             "Only as we approached western",
             "Kansas did the ice begin to",
-            "relent|||the sun having done",
+            "relent||| the sun having done",
             "its work at last."
         ),
         # The crossing
