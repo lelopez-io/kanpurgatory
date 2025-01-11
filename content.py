@@ -306,9 +306,9 @@ class Content:
                         text += " "
                     # Process the line for voice text
                     processed_line = (line.strip()
-                                   .replace("|||", " . . . ")
-                                   .replace("...", " . . . ")
-                                   .replace("***", "")  # Remove emphasis markers entirely for voice
+                                    .replace("|||", " . . . ")
+                                    .replace("...", " . . . ")
+                                    .replace("***", ' "" ')
                     )
                     text += processed_line
             return text
