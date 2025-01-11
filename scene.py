@@ -51,13 +51,21 @@ class KanpurgatoryVideo(VoiceoverScene):
         bar_height = 0.2  # Increased height for visibility
         bar_width = config.frame_width
         
-        # Create gradient background using Rectangle
-        gradient_bar = Rectangle(
-            width=bar_width,
-            height=bar_height,
-            fill_opacity=1,
-            stroke_width=0,
-        ).set_color_by_gradient(BLUE_D, PURPLE_A, "#9B4DCA")
+        # Create gradient bar using SVG
+        gradient_bar = SVGMobject(
+            """<svg viewBox="0 0 900 20" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y1="0%">
+                        <stop offset="0%" style="stop-color:#1E3D59;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#4B2D84;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#9B4DCA;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <rect width="900" height="20" fill="url(#progressGradient)" />
+            </svg>"""
+        )
+        gradient_bar.set_width(bar_width)
+        gradient_bar.set_height(bar_height, stretch=True)
         
         # Create black overlay
         black_bar = Rectangle(
@@ -73,6 +81,7 @@ class KanpurgatoryVideo(VoiceoverScene):
         bar_group.move_to([0, config.frame_height/2 - bar_height/2, 0])  # Precise positioning at top
         
         return bar_group
+
     def create_passage_counter(self):
         # Create counter text in top right
         return Text(
