@@ -165,25 +165,31 @@ class Content:
             "a community formed among",
             "the stranded. The Spanish-",
             "speaking travelers became",
-            "unexpected allies, their",
-            "determination inspiring.",
-            "They were first to request",
-            "shovels from the hotel staff,",
-            "who dismissed our plight|||",
-            "unwilling to brave the cold",
-            "that imprisoned us all."
-        ),
-        # Community forms
-        (
-            "In their faces, I saw the",
-            "warmth of family - parents,",
+            "unexpected allies - parents,",
             "siblings, aunts, uncles,",
-            "cousins - all united in this",
-            "cold purgatory. Their spirit",
-            "brought comfort.||| Then I",
-            "spotted what seemed a gift -",
-            "a mini dozer next door",
-            "carving paths through drifts."
+            "cousins - all united by",
+            "circumstance. Their warmth",
+            "and determination inspired|||",
+            "as they led our attempts",
+            "to secure help."
+        ),
+        # Staff indifference
+        (
+            "When we requested help, the",
+            "hotel offered a single shovel -",
+            "available only if we surrendered",
+            "an ID at the front desk. They",
+            "showed no interest in clearing",
+            "their own parking lot||| leaving",
+            "us to forge our own salvation.",
+            "",
+            "Progress came slowly as cars",
+            "cut paths through the snow,",
+            "each victory expanding our",
+            "options.||| Then I spotted what",
+            "seemed a gift - a mini dozer",
+            "next door carving paths",
+            "through drifts."
         ),
         # False salvation
         (
