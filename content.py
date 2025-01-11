@@ -17,7 +17,7 @@ class Content:
             "The endless horizon stretches",
             "before me like judgment day",
             "itself - flat, unforgiving,",
-            "eternal. What should have",
+            "eternal.||| What should have",
             "been a single day's passage",
             "through Kansas, as we made",
             "our way from Houston to Boulder,",
