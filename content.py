@@ -3,7 +3,7 @@ from typing import Optional
 
 @dataclass
 class Passage:
-    text: str
+    display_text: str
     voice_text: str
     next: Optional['Passage'] = None
 
@@ -288,6 +288,12 @@ class Content:
     passages: tuple[Passage, ...] = None
 
     def __post_init__(self):
+        def format_display_text(lines):
+            # First join lines with newlines
+            text = "\n".join(lines)
+            # Remove all markers from display text
+            return text.replace("|||", "").replace("***", "")
+
         def format_voice_text(lines):
             # Join lines with spaces, preserving intentional paragraph breaks
             text = ""

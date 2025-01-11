@@ -137,11 +137,8 @@ class KanpurgatoryVideo(VoiceoverScene):
         ).to_edge(RIGHT, buff=0.5).to_edge(UP, buff=0.5)
 
     def create_text_block(self, text, opacity=1, margin=0.2):
-        # Transform display text
-        display_text = text.replace("|||", "").replace("***", "")  # Remove all markers
-
         text_obj = Text(
-            display_text,
+            text,
             font="Spectral",
             font_size=56,  # Default base size that will scale automatically
             color=WHITE,
@@ -208,7 +205,7 @@ class KanpurgatoryVideo(VoiceoverScene):
             
             # Get black overlay bar for animation
             black_overlay = progress_bar[1]  # Second element is the black bar
-            next_text = self.create_text_block(passage.text)
+            next_text = self.create_text_block(passage.display_text)
             
             with self.voiceover(text=passage.voice_text) as tracker:
                 # Quick fade transition at the start (0.5 seconds)
