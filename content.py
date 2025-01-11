@@ -213,7 +213,7 @@ class Content:
         (
             "The cold calculus of old",
             "grudges proved stronger than",
-            "community need, echoing the",
+            "community need, ***echoing*** the",
             "hotel's earlier indifference.",
             "",
             "In twenty years of weathering",
