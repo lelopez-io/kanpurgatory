@@ -195,11 +195,9 @@ class Content:
             "The operator's response cut",
             "deeper than the cold.|||",
             "",
-            "He refused on principle,",
-            "unmoved by our plight -",
-            "past payment disputes with",
-            "the hotel owner outweighed",
-            "our present need."
+            "He refused on principle,|||",
+            "citing past payment disputes",
+            "with the hotel owner."
         ),
         # Texas comparison
         (
