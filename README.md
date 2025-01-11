@@ -2,40 +2,9 @@
 
 A Manim animation project that explores the liminal space of Kansas through poetry and animation.
 
-## Voice Configuration
+## Quick Start
 
-ElevenLabs voice IDs:
-
-Production voice (planned):
-
-```
-hyqpbxvsDwE0hQA0TcGB
-```
-
-Voice: "Zig"
-
--   Deep, serious, young, soothing male voice
--   Midwest American accent
--   Ideal for audiobooks and narrative content
--   Character count: 143
--   Training size: 845K samples
-
-Development/testing voice:
-
-```
-nPczCjzI2devNBz1zQrb
-```
-
-Voice: "Brian"
-
--   Default voice profile
--   Deep, middle-aged male voice
--   American accent
--   Suitable for narration
-
-## Setup
-
-### Initial Setup
+### 1. Initial Setup
 
 ```bash
 # Install mise and system dependencies (macOS)
@@ -47,10 +16,9 @@ cp assets/fonts/Spectral-ExtraLight.ttf ~/Library/Fonts/
 # Trust and install development tools (Python, Poetry, etc.)
 mise trust
 mise install
-
 ```
 
-### Environment Configuration
+### 2. Environment Configuration
 
 ```bash
 # Set Python build configuration
@@ -66,7 +34,7 @@ export LDFLAGS="-L/opt/homebrew/opt/llvm/lib -L/opt/homebrew/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include -I/opt/homebrew/include"
 ```
 
-### Development Environment
+### 3. Project Setup
 
 ```bash
 # Install project dependencies
@@ -76,28 +44,13 @@ poetry install
 source $(poetry env info --path)/bin/activate
 ```
 
-### Development Notes
+### 4. Configuration
 
-#### Font Changes and Cache
-When making changes to fonts, you may need to clear Manim's cache to see the changes:
-
-```bash
-# Remove cached renders
-rm -rf media/
-
-# Then re-run your render command
-VOICE_SERVICE=gtts poetry run manim -pql scene.py KanpurgatoryVideo
-```
-
-### Configuration
-
-1. Create a `.env` file in the project root
-2. Add your ElevenLabs API key:
+Create a `.env` file in the project root with your ElevenLabs API key:
 
 ```
 ELEVEN_API_KEY=your_api_key_here
 ```
-
 
 ## Usage
 
@@ -114,19 +67,28 @@ VOICE_SERVICE=gtts poetry run manim -pql scene.py KanpurgatoryVideo
 Note: VOICE_SERVICE environment variable is required and must be set to either 'gtts' or 'elevenlabs'.
 When using 'elevenlabs', the ELEVEN_API_KEY environment variable must also be set.
 
+## Troubleshooting
+
+### Font Changes Not Appearing
+
+If font changes aren't visible after updating fonts, clear Manim's cache:
+
+```bash
+# Remove cached renders
+rm -rf media/
+```
+
+Then re-render the video.
+
 ## Development Notes
 
 ### Voice Configuration
 
-ElevenLabs voice IDs:
-
-Production voice (planned):
+#### Production Voice (Zig)
 
 ```
 hyqpbxvsDwE0hQA0TcGB
 ```
-
-Voice: "Zig"
 
 -   Deep, serious, young, soothing male voice
 -   Midwest American accent
@@ -134,13 +96,11 @@ Voice: "Zig"
 -   Character count: 143
 -   Training size: 845K samples
 
-Development/testing voice:
+#### Development Voice (Brian)
 
 ```
 nPczCjzI2devNBz1zQrb
 ```
-
-Voice: "Brian"
 
 -   Default voice profile
 -   Deep, middle-aged male voice
