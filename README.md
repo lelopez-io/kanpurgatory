@@ -7,35 +7,47 @@ A Manim animation project that explores the liminal space of Kansas through poet
 ElevenLabs voice IDs:
 
 Production voice (planned):
+
 ```
 hyqpbxvsDwE0hQA0TcGB
 ```
+
 Voice: "Zig"
-- Deep, serious, young, soothing male voice
-- Midwest American accent
-- Ideal for audiobooks and narrative content
-- Character count: 143
-- Training size: 845K samples
+
+-   Deep, serious, young, soothing male voice
+-   Midwest American accent
+-   Ideal for audiobooks and narrative content
+-   Character count: 143
+-   Training size: 845K samples
 
 Development/testing voice:
+
 ```
 nPczCjzI2devNBz1zQrb
 ```
+
 Voice: "Brian"
-- Default voice profile
-- Deep, middle-aged male voice
-- American accent
-- Suitable for narration
+
+-   Default voice profile
+-   Deep, middle-aged male voice
+-   American accent
+-   Suitable for narration
 
 ## Setup
 
-### System Dependencies
+### Initial Setup
+
 ```bash
+# Trust and install development tools (Python, Poetry, etc.)
+mise trust
+mise install
+
 # Install system dependencies (macOS)
 brew install py3cairo ffmpeg pango pkg-config scipy sox llvm
 ```
 
-### Environment Setup
+### Environment Configuration
+
 ```bash
 # Set Python build configuration
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
@@ -51,10 +63,8 @@ export CPPFLAGS="-I/opt/homebrew/opt/llvm/include -I/opt/homebrew/include"
 ```
 
 ### Development Environment
-```bash
-# Install Python, Poetry, and Rust via mise
-mise install
 
+```bash
 # Install project dependencies
 poetry install
 
@@ -63,19 +73,23 @@ source $(poetry env info --path)/bin/activate
 ```
 
 ### Configuration
+
 1. Create a `.env` file in the project root
 2. Add your ElevenLabs API key:
+
 ```
 ELEVEN_API_KEY=your_api_key_here
 ```
 
 ### Font Requirements
-- Spectral font family (specifically Spectral-ExtraLight.ttf)
-- Place font file in `font/` directory
+
+-   Spectral font family (specifically Spectral-ExtraLight.ttf)
+-   Place font file in `font/` directory
 
 ## Usage
 
 Generate the video:
+
 ```bash
 # Production mode (uses ElevenLabs API)
 VOICE_SERVICE=elevenlabs poetry run manim -pql scene.py KanpurgatoryVideo
@@ -94,22 +108,28 @@ When using 'elevenlabs', the ELEVEN_API_KEY environment variable must also be se
 ElevenLabs voice IDs:
 
 Production voice (planned):
+
 ```
 hyqpbxvsDwE0hQA0TcGB
 ```
+
 Voice: "Zig"
-- Deep, serious, young, soothing male voice
-- Midwest American accent
-- Ideal for audiobooks and narrative content
-- Character count: 143
-- Training size: 845K samples
+
+-   Deep, serious, young, soothing male voice
+-   Midwest American accent
+-   Ideal for audiobooks and narrative content
+-   Character count: 143
+-   Training size: 845K samples
 
 Development/testing voice:
+
 ```
 nPczCjzI2devNBz1zQrb
 ```
+
 Voice: "Brian"
-- Default voice profile
-- Deep, middle-aged male voice
-- American accent
-- Suitable for narration
+
+-   Default voice profile
+-   Deep, middle-aged male voice
+-   American accent
+-   Suitable for narration
