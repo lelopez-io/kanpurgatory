@@ -232,7 +232,7 @@ class Content:
             "not to be caught in such",
             "limbo again."
         ),
-        # Final escape
+        # The final attempt
         (
             "Finally, four days after our",
             "journey began, we attempted",
@@ -244,26 +244,29 @@ class Content:
             "",
             "Only as we approached western",
             "Kansas did the ice begin to",
-            "relent, the sun having done",
-            "its work. The roads improved",
-            "with each mile westward, and",
-            "crossing into Colorado felt",
-            "like entering another world -",
-            "their crews had already tamed",
-            "that morning's fresh snowfall,",
-            "leaving nothing but clear",
-            "paths before us."
+            "relent|||the sun having done",
+            "its work at last."
         ),
-        # The contrast
+        # The crossing
         (
-            "The contrast was immediate -",
-            "clear roads stretched before",
-            "us like a welcome reprieve.",
-            "Yet exhaustion had settled",
-            "deep in my bones from what",
-            "remained the most stressful",
-            "drive I'd ever experienced,",
-            "all on essentially flat roads."
+            "The roads improved with each",
+            "mile westward. Crossing into",
+            "Colorado felt like entering",
+            "another world - their crews",
+            "had already tamed that",
+            "morning's fresh snowfall|||",
+            "leaving clear paths before us."
+        ),
+        # The aftermath
+        (
+            "The contrast was stark.",
+            "Yet despite the clear roads",
+            "ahead, exhaustion had settled",
+            "deep in my bones. What should",
+            "have been a simple drive|||",
+            "became the most grueling",
+            "journey I'd ever experienced",
+            "- all on essentially flat roads."
         ),
         # Final reflection
         (
