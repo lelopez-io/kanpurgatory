@@ -65,7 +65,11 @@ VOICE_SERVICE=gtts poetry run manim -pql scene.py KanpurgatoryVideo
 ```
 
 Note: VOICE_SERVICE environment variable is required and must be set to either 'gtts' or 'elevenlabs'.
-When using 'elevenlabs', the ELEVEN_API_KEY environment variable must also be set.
+When using 'elevenlabs':
+
+-   The ELEVEN_API_KEY environment variable must be set
+-   You'll need to allow interactive pip installation of additional dependencies when prompted
+-   After the first run installs dependencies, you'll need to run the command again
 
 ## Troubleshooting
 
@@ -87,20 +91,24 @@ Then re-render the video.
 The project uses a structured format for content in `content.py`:
 
 #### Title & Subtitle
+
 Simple strings that form the opening sequence:
+
 ```python
 title: str = "Kanpurgatory:"
 subtitle: str = "Field Notes from the In-Between"
 ```
 
 #### Story Structure
+
 The story is composed of passages, each containing lines of text. Special markers can be used within the text:
 
-- `|||` - Adds a dramatic pause (converts to " . . . " in voiceover)
-- `...` - Ellipsis (converts to " . . . " in voiceover)
-- `***` - Adds emphasis (converts to quoted text in voiceover)
+-   `|||` - Adds a dramatic pause (converts to " . . . " in voiceover)
+-   `...` - Ellipsis (converts to " . . . " in voiceover)
+-   `***` - Adds emphasis (converts to quoted text in voiceover)
 
 Example:
+
 ```python
 story = (
     (
