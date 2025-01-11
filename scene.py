@@ -5,6 +5,7 @@ from manim_voiceover.services.gtts import GTTSService
 from content import Content
 from dotenv import load_dotenv
 import os
+from pathlib import Path
 import argparse
 
 class KanpurgatoryVideo(VoiceoverScene):
@@ -21,6 +22,14 @@ class KanpurgatoryVideo(VoiceoverScene):
         super().__init__()
         # Load environment variables
         load_dotenv()
+
+        # Print asset directory location
+        print(f"Assets directory: {config.get_dir('assets_dir')}")
+        
+        # Check if SVG exists
+        svg_path = Path(config.get_dir('assets_dir')) / "progress-gradient.svg"
+        print(f"Looking for SVG at: {svg_path}")
+        print(f"SVG exists: {svg_path.exists()}")
 
         # Check required voice service selection
         voice_service = os.getenv('VOICE_SERVICE')
@@ -51,21 +60,26 @@ class KanpurgatoryVideo(VoiceoverScene):
         bar_height = 0.2  # Increased height for visibility
         bar_width = config.frame_width
         
-        # Create gradient bar using SVG
-        gradient_bar = SVGMobject(
-            """<svg viewBox="0 0 900 20" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y1="0%">
-                        <stop offset="0%" style="stop-color:#1E3D59;stop-opacity:1" />
-                        <stop offset="50%" style="stop-color:#4B2D84;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#9B4DCA;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <rect width="900" height="20" fill="url(#progressGradient)" />
-            </svg>"""
-        )
-        gradient_bar.set_width(bar_width)
-        gradient_bar.set_height(bar_height, stretch=True)
+        try:
+            # Try to load the SVG with absolute path
+            svg_path = Path(config.get_dir('assets_dir')) / "progress-gradient.svg"
+            print(f"Loading SVG from: {svg_path}")
+            
+            gradient_bar = SVGMobject(
+                str(svg_path),  # Convert Path to string
+                height=bar_height,
+                width=bar_width
+            )
+        except Exception as e:
+            print(f"Error loading SVG: {e}")
+            # Fallback to a simple colored rectangle if SVG fails
+            gradient_bar = Rectangle(
+                width=bar_width,
+                height=bar_height,
+                fill_color=BLUE,
+                fill_opacity=1,
+                stroke_width=0
+            )
         
         # Create black overlay
         black_bar = Rectangle(
@@ -81,7 +95,7 @@ class KanpurgatoryVideo(VoiceoverScene):
         bar_group.move_to([0, config.frame_height/2 - bar_height/2, 0])  # Precise positioning at top
         
         return bar_group
-
+    
     def create_passage_counter(self):
         # Create counter text in top right
         return Text(
