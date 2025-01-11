@@ -12,7 +12,7 @@ numpy = "*"
 scipy = "*"
 python-dotenv = "*"
 llvmlite = ">=0.39.0"
-manim-voiceover = {version = "0.3.7", extras = ["elevenlabs"]}
+manim-voiceover = {version = "0.3.7", extras = ["elevenlabs", "gtts"]}
 setuptools = "*"
 
 [build-system]
