@@ -205,7 +205,7 @@ class Content:
             "The operator's response cut",
             "deeper than the cold.|||",
             "",
-            "He refused on principle,|||",
+            "He refused on principle,",
             "citing past payment disputes",
             "with the hotel owner."
         ),
