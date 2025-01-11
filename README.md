@@ -38,12 +38,13 @@ Voice: "Brian"
 ### Initial Setup
 
 ```bash
+# Install mise and system dependencies (macOS)
+brew install mise py3cairo ffmpeg pango pkg-config scipy sox llvm
+
 # Trust and install development tools (Python, Poetry, etc.)
 mise trust
 mise install
 
-# Install system dependencies (macOS)
-brew install py3cairo ffmpeg pango pkg-config scipy sox llvm
 ```
 
 ### Environment Configuration
