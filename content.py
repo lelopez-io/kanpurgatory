@@ -11,7 +11,7 @@ class Content:
     title: str = "Kanpurgatory:"
     subtitle: str = "Field Notes from the In-Between"
     story: tuple[tuple[str, ...], ...] = (
-        # Introduction and setup
+        # Opening - The vast expanse
         (
             "The endless horizon stretches",
             "before me like judgment day",
@@ -28,7 +28,7 @@ class Content:
             "in this vast waiting room of",
             "the Great Plains."
         ),
-        # The concept of purgatory
+        # The definition
         (
             "Here in this liminal space,",
             "where heaven meets earth in a",
@@ -42,7 +42,7 @@ class Content:
             "",
             "***Just***... Kansas."
         ),
-        # First trial - The ice arrival
+        # The descent
         (
             "Our descent began with ice -",
             "treacherous and immediate.",
@@ -53,8 +53,10 @@ class Content:
             "parking lot became our first",
             "trial, a glacial obstacle",
             "course that transformed each",
-            "step into a gamble.",
-            "",
+            "step into a gamble."
+        ),
+        # The false guide
+        (
             "The front desk attendant,",
             "our supposed ***Virgil*** in",
             "this frozen realm, offered",
@@ -65,18 +67,20 @@ class Content:
             "entrance - just a vague gesture",
             "toward illumination|||",
             "as if salvation could be",
-            "found in its dim glow.",
-            "",
+            "found in its dim glow."
+        ),
+        # First casualty
+        (
             "The rain crystallized upon",
             "impact, turning every surface",
             "into a mirror of our mounting",
             "uncertainty. Despite our careful",
             "choreography around the vehicle",
-            "under the covered port, the ice",
-            "claimed my wife as its first",
-            "victim."
+            "under the covered port,|||",
+            "the ice claimed my wife as",
+            "its first victim."
         ),
-        # The second circle
+        # The thunder
         (
             "The second circle of our",
             "confinement announced itself",
@@ -86,20 +90,24 @@ class Content:
             "violent it launched me from",
             "sleep, convinced an 18-wheeler",
             "had careened off the nearby",
-            "highway. The morning brought",
-            "us to a breakfast room full",
-            "of fellow travelers, each with",
-            "their own tale of narrowly",
-            "escaped disaster from the",
-            "previous night's treacherous",
-            "journey. A sweet lady blessed",
-            "us with good wishes after",
-            "sharing stories of origins",
-            "and destinations - all of us",
-            "now united in our temporary",
+            "highway."
+        ),
+        # Fellow travelers
+        (
+            "The morning brought us to a",
+            "breakfast room full of fellow",
+            "travelers, each with their own",
+            "tale of narrowly escaped",
+            "disaster from the previous",
+            "night's treacherous journey.",
+            "A sweet lady blessed us with",
+            "good wishes after sharing",
+            "stories of origins and",
+            "destinations - all of us now",
+            "united in our temporary",
             "imprisonment."
         ),
-        # Digital torments and state contrast
+        # Digital purgatory
         (
             "Back in our room, the",
             "television became a special",
@@ -114,21 +122,24 @@ class Content:
             "abandoned promise|||",
             "snow plows appeared less",
             "frequently than mirages",
-            "in a desert.",
-            "",
+            "in a desert."
+        ),
+        # State contrast
+        (
             "The contrast was stark - in",
             "the brief drive from Colorado's",
             "border to our home, we'd",
             "typically see more road",
             "treatment vehicles than Kansas",
             "managed to muster for its",
-            "entire storm response. The",
-            "state had abandoned its people",
-            "to weather's whims, a",
-            "government's shrug in the face",
-            "of nature's fury."
+            "entire storm response.",
+            "",
+            "The state had abandoned its",
+            "people to weather's whims,|||",
+            "a government's shrug in the",
+            "face of nature's fury."
         ),
-        # Community and bureaucracy
+        # The deterioration
         (
             "By the third day, when",
             "breakfast deteriorated to",
@@ -140,8 +151,10 @@ class Content:
             "graveyard of vehicles, snow",
             "piled high as tire wells,",
             "with no hope of municipal",
-            "salvation.",
-            "",
+            "salvation."
+        ),
+        # Unexpected allies
+        (
             "As we plotted our escape,",
             "a community formed among",
             "the stranded. The Spanish-",
@@ -150,13 +163,9 @@ class Content:
             "faces reflecting the warmth",
             "of family - parents, siblings,",
             "aunts, uncles, cousins - in",
-            "this cold purgatory. They",
-            "were the first to request",
-            "shovels from the indifferent",
-            "front desk, initiating our",
-            "collective bid for freedom."
+            "this cold purgatory."
         ),
-        # The dozer and Texas comparison
+        # False hope
         (
             "Hope appeared briefly in the",
             "form of a mini dozer clearing",
@@ -169,14 +178,15 @@ class Content:
             "layer of this purgatorial",
             "bureaucracy.",
             "",
-            "He refused on principle,",
-            "citing past payment disputes",
-            "with the hotel owner, unmoved",
-            "by offers of direct compensation.",
-            "The cold calculus of old grudges",
-            "proved stronger than community",
-            "need, echoing the hotel's",
-            "earlier indifference.",
+            "He refused on principle|||",
+            "citing past payment disputes."
+        ),
+        # Texas comparison
+        (
+            "The cold calculus of old",
+            "grudges proved stronger than",
+            "community need, echoing the",
+            "hotel's earlier indifference.",
             "",
             "In twenty years of weathering",
             "hurricanes in Texas, I'd never",
@@ -186,7 +196,7 @@ class Content:
             "surviving nature's fury required",
             "standing together."
         ),
-        # The Salina pilgrimage
+        # Escape attempt
         (
             "After several cars managed to",
             "forge a path through the snow,",
@@ -196,11 +206,14 @@ class Content:
             "- a mere 56 miles that",
             "stretched into a two-hour",
             "pilgrimage - tested every nerve.",
+            "",
             "The roads remained treacherous,",
             "as if Kansas itself was",
             "reluctant to release its grip",
-            "on wayward souls.",
-            "",
+            "on wayward souls."
+        ),
+        # Night in Salina
+        (
             "Unwilling to transform the",
             "remaining seven-hour drive",
             "into fourteen hours of white-",
@@ -214,7 +227,7 @@ class Content:
             "not to be caught in such",
             "limbo again."
         ),
-        # The escape
+        # Final escape
         (
             "Finally, four days after our",
             "journey began, we broke free",
@@ -222,14 +235,17 @@ class Content:
             "hours remained a trial - hands",
             "requiring rest each hour from",
             "the tension of navigating",
-            "ice-slicked roads. Yet we'd",
-            "timed our departure perfectly",
-            "for once, arriving in Colorado",
-            "just after their storm had",
-            "passed, allowing their more",
-            "vigilant road crews time to",
-            "restore order.",
+            "ice-slicked roads.",
             "",
+            "Yet we'd timed our departure",
+            "perfectly for once, arriving",
+            "in Colorado just after their",
+            "storm had passed, allowing their",
+            "more vigilant road crews time",
+            "to restore order."
+        ),
+        # The contrast
+        (
             "The contrast was immediate",
             "and telling - smooth sailing",
             "all the way home, though by",
@@ -252,8 +268,10 @@ class Content:
             "peculiar helplessness that",
             "comes when nature and",
             "institutions alike seem to",
-            "conspire against your progress.",
-            "",
+            "conspire against your progress."
+        ),
+        # Epilogue
+        (
             "Some say purgatory is a",
             "place of cleansing|||",
             "if so, we emerged from Kansas",
