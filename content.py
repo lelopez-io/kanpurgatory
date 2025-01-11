@@ -258,12 +258,12 @@ class Content:
         ),
         # Final reflection
         (
-            "Welcome to ***Kanpurgatory***",
+            "Beware ***Kanpurgatory***",
             "- where every soul caught",
-            "between where they've been",
-            "and where they're meant to",
-            "be learns the true meaning",
-            "of limbo. In our case, it",
+            "between departure and",
+            "destination discovers the",
+            "true meaning of limbo.",
+            "In our case, it",
             "was a four-day lesson in",
             "patience, community, and the",
             "peculiar helplessness that",
