@@ -191,7 +191,7 @@ class Content:
             "In twenty years of weathering",
             "hurricanes in Texas, I'd never",
             "encountered such reluctance to",
-            "help fellow humans in distress",
+            "help fellow humans in distress|||",
             "- back home, we'd learned that",
             "surviving nature's fury required",
             "standing together."
