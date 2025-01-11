@@ -41,6 +41,9 @@ Voice: "Brian"
 # Install mise and system dependencies (macOS)
 brew install mise py3cairo ffmpeg pango pkg-config scipy sox llvm
 
+# Install font
+cp assets/fonts/Spectral-ExtraLight.ttf ~/Library/Fonts/
+
 # Trust and install development tools (Python, Poetry, etc.)
 mise trust
 mise install
