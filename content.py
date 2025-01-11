@@ -306,9 +306,11 @@ class Content:
                         text += " "
                     # Process the line for voice text
                     processed_line = (line.strip()
+                                    .replace("***", ' "" ')
                                     .replace("|||", " . . . ")
                                     .replace("...", " . . . ")
-                                    .replace("***", ' "" ')
+                                    .replace(" - ", " . . . ")
+                                    
                     )
                     text += processed_line
             return text
