@@ -4,6 +4,7 @@ from typing import Optional
 @dataclass
 class Passage:
     text: str
+    voice_text: str
     next: Optional['Passage'] = None
 
 @dataclass
@@ -287,11 +288,32 @@ class Content:
     passages: tuple[Passage, ...] = None
 
     def __post_init__(self):
+        def format_voice_text(lines):
+            # Join lines with spaces, preserving intentional paragraph breaks
+            text = ""
+            for line in lines:
+                if line == "":  # Keep empty lines as pauses
+                    text += " . . . "
+                else:
+                    # Add space if not at start and not after a pause
+                    if text and not text.endswith(" . . . "):
+                        text += " "
+                    # Process the line for voice text
+                    processed_line = (line.strip()
+                                   .replace("|||", " . . . ")
+                                   .replace("...", " . . . ")
+                                   .replace("***", "")  # Remove emphasis markers entirely for voice
+                    )
+                    text += processed_line
+            return text
+
         self.passages = tuple(
             Passage(
-                "\n".join(lines),
+                text="\n".join(lines),  # Keep original formatting for display
+                voice_text=format_voice_text(lines),  # Smooth format for voice
                 next=None if i == len(self.story) - 1 else Passage(
-                    "\n".join(self.story[i + 1])
+                    text="\n".join(self.story[i + 1]),
+                    voice_text=format_voice_text(self.story[i + 1])
                 )
             )
             for i, lines in enumerate(self.story)

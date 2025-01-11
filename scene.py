@@ -209,15 +209,8 @@ class KanpurgatoryVideo(VoiceoverScene):
             # Get black overlay bar for animation
             black_overlay = progress_bar[1]  # Second element is the black bar
             next_text = self.create_text_block(passage.text)
-
-            # Transform text for voice service
-            voice_text = (passage.text
-                         .replace("|||", " . . . ")
-                         .replace("...", " . . . ")
-                         .replace("***", ' "" ')
-            )
             
-            with self.voiceover(text=voice_text) as tracker:
+            with self.voiceover(text=passage.voice_text) as tracker:
                 # Quick fade transition at the start (0.5 seconds)
                 if current_text is None:
                     self.play(
