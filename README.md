@@ -82,6 +82,36 @@ Then re-render the video.
 
 ## Development Notes
 
+### Content Formatting
+
+The project uses a structured format for content in `content.py`:
+
+#### Title & Subtitle
+Simple strings that form the opening sequence:
+```python
+title: str = "Kanpurgatory:"
+subtitle: str = "Field Notes from the In-Between"
+```
+
+#### Story Structure
+The story is composed of passages, each containing lines of text. Special markers can be used within the text:
+
+- `|||` - Adds a dramatic pause (converts to " . . . " in voiceover)
+- `...` - Ellipsis (converts to " . . . " in voiceover)
+- `***` - Adds emphasis (converts to quoted text in voiceover)
+
+Example:
+```python
+story = (
+    (
+        "Not quite damnation,|||",  # Pause after "damnation"
+        "not quite salvation.",
+        "",
+        "***Just***... Kansas."     # Emphasis on "Just"
+    ),
+)
+```
+
 ### Voice Configuration
 
 #### Production Voice (Zig)
