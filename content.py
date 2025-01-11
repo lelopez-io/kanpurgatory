@@ -164,29 +164,42 @@ class Content:
             "the stranded. The Spanish-",
             "speaking travelers became",
             "unexpected allies, their",
-            "faces reflecting the warmth",
-            "of family - parents, siblings,",
-            "aunts, uncles, cousins - in",
-            "this cold purgatory."
+            "determination inspiring.",
+            "They were first to request",
+            "shovels from the hotel staff,",
+            "who dismissed our plight|||",
+            "unwilling to brave the cold",
+            "that imprisoned us all."
         ),
-        # False hope
+        # Community forms
         (
-            "A glimmer of hope appeared -",
-            "a mini dozer clearing snow",
-            "at the neighboring restaurant.",
+            "In their faces, I saw the",
+            "warmth of family - parents,",
+            "siblings, aunts, uncles,",
+            "cousins - all united in this",
+            "cold purgatory. Their spirit",
+            "brought comfort.||| Then I",
+            "spotted what seemed a gift -",
+            "a mini dozer next door",
+            "carving paths through drifts."
+        ),
+        # False salvation
+        (
+            "This mechanical savior at",
+            "the neighboring restaurant",
+            "seemed an answer to prayer.",
             "Wading through knee-deep",
-            "drifts to negotiate our",
-            "freedom, we offered payment",
-            "to free our vehicles from",
-            "their frozen prison.",
+            "drifts, we offered payment",
+            "to free our vehicles.",
             "",
-            "However, the operator revealed",
-            "another layer of this",
-            "purgatorial bureaucracy.",
+            "The operator's response cut",
+            "deeper than the cold.|||",
             "",
-            "He refused to help|||",
-            "citing past disputes with",
-            "the hotel owner."
+            "He refused on principle,",
+            "unmoved by our plight -",
+            "past payment disputes with",
+            "the hotel owner outweighed",
+            "our present need."
         ),
         # Texas comparison
         (
