@@ -125,15 +125,16 @@ class Content:
             "frequently than mirages",
             "in a desert."
         ),
-        # State contrast
+        # State neglect
         (
-            "The contrast was stark - in",
-            "the brief drive from Colorado's",
-            "border to our home, we'd",
-            "typically see more road",
-            "treatment vehicles than Kansas",
-            "managed to muster for its",
-            "entire storm response.",
+            "The roads remained untamed,",
+            "a testament to Kansas's",
+            "indifference. In four days,",
+            "we counted fewer plows than",
+            "fingers on one hand - a",
+            "pitiful showing for a state",
+            "so familiar with winter's",
+            "rage.",
             "",
             "The state had abandoned its",
             "people to weather's whims,|||",
