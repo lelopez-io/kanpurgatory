@@ -313,13 +313,14 @@ class Content:
             "Some say purgatory is a",
             "place of cleansing.|||",
             "If so, we emerged from Kansas",
-            "scrubbed clean of any illusions",
-            "about winter travel through",
-            "the Great Plains, with a",
-            "newfound appreciation for the",
-            "small kindnesses of fellow",
-            "travelers caught in the same",
-            "divine comedy."
+            "transformed - having witnessed",
+            "how strangers, bound by common",
+            "circumstance, came together to",
+            "forge ahead despite the cold",
+            "indifference around them,",
+            "finding unexpected grace in",
+            "the space between departure",
+            "and arrival."
         )
     )
     passages: tuple[Passage, ...] = None
