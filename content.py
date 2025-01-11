@@ -64,7 +64,7 @@ class Content:
             "little guidance beyond pointing",
             "to a light post when pressed",
             "about safer parking options.",
-            "No salt for the ice, no side",
+            "No salt for the ice,||| no side",
             "entrance - just a vague gesture",
             "toward illumination|||",
             "as if salvation could be",
