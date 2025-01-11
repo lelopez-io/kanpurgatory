@@ -82,10 +82,6 @@ source $(poetry env info --path)/bin/activate
 ELEVEN_API_KEY=your_api_key_here
 ```
 
-### Font Requirements
-
--   Spectral font family (specifically Spectral-ExtraLight.ttf)
--   Place font file in `font/` directory
 
 ## Usage
 
