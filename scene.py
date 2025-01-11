@@ -51,27 +51,41 @@ class KanpurgatoryVideo(VoiceoverScene):
         bar_height = 0.2  # Increased height for visibility
         bar_width = config.frame_width
         
-        # Create bars with exact same dimensions
-        yellow_bar = Rectangle(
-            width=bar_width,
-            height=bar_height,
-            fill_color=YELLOW,
-            fill_opacity=1,
-            stroke_width=0,
-            stroke_opacity=0  # Ensure no stroke
-        )
+        # Create gradient background using VMobject for gradient fill
+        gradient_bar = VMobject()
+        gradient_bar.set_points_as_corners([
+            [-bar_width/2, -bar_height/2, 0],  # Bottom left
+            [bar_width/2, -bar_height/2, 0],   # Bottom right
+            [bar_width/2, bar_height/2, 0],    # Top right
+            [-bar_width/2, bar_height/2, 0],   # Top left
+            [-bar_width/2, -bar_height/2, 0],  # Back to start
+        ])
         
-        white_bar = Rectangle(
-            width=bar_width,
-            height=bar_height,
-            fill_color=WHITE,
+        # Apply gradient fill
+        gradient_bar.set_fill(opacity=1)
+        gradient_bar.set_style(
+            fill_color=None,
             fill_opacity=1,
             stroke_width=0,
-            stroke_opacity=0  # Ensure no stroke
+            stroke_opacity=0,
+            background_stroke_width=0,
+            background_stroke_opacity=0,
+        )
+        colors = ["#1E3D59", "#4B2D84", "#9B4DCA"]  # Dark blue to purple to mystical purple
+        gradient_bar.set_color_by_gradient(*colors)
+        
+        # Create black overlay
+        black_bar = Rectangle(
+            width=bar_width,
+            height=bar_height,
+            fill_color=BLACK,
+            fill_opacity=1,
+            stroke_width=0,
+            stroke_opacity=0
         )
         
         # Create group and position it
-        bar_group = VGroup(yellow_bar, white_bar)
+        bar_group = VGroup(gradient_bar, black_bar)
         bar_group.move_to([0, config.frame_height/2 - bar_height/2, 0])  # Precise positioning at top
         
         return bar_group
@@ -154,8 +168,8 @@ class KanpurgatoryVideo(VoiceoverScene):
             self.add(progress_bar)
             self.add(passage_counter)
             
-            # Get white overlay bar for animation
-            white_overlay = progress_bar[1]  # Second element is the white bar
+            # Get black overlay bar for animation
+            black_overlay = progress_bar[1]  # Second element is the black bar
             next_text = self.create_text_block(passage.text)
 
             # Transform text for voice service
@@ -181,9 +195,9 @@ class KanpurgatoryVideo(VoiceoverScene):
                         run_time=0.5
                     )
 
-                # Animate the white overlay shrinking to reveal yellow bar
+                # Animate the black overlay shrinking to reveal gradient bar
                 self.play(
-                    white_overlay.animate.stretch_to_fit_width(0).align_to(progress_bar, RIGHT),  # Shrink width only
+                    black_overlay.animate.stretch_to_fit_width(0).align_to(progress_bar, RIGHT),
                     rate_func=linear,
                     run_time=tracker.duration - 0.5
                 )
