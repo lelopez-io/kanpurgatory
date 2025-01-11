@@ -265,8 +265,9 @@ class Content:
             "deep in my bones. What should",
             "have been a simple drive|||",
             "became the most grueling",
-            "journey I'd ever experienced",
-            "- all on essentially flat roads."
+            "journey I'd ever experienced|||",
+            "defeated by the most",
+            "unassuming terrain imaginable."
         ),
         # Final reflection
         (
