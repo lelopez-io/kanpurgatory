@@ -60,7 +60,7 @@ class KanpurgatoryVideo(VoiceoverScene):
             )
 
     def create_progress_bar(self):
-        bar_height = 0.2  # Increased height for visibility
+        bar_height = 0.2
         bar_width = config.frame_width
         
         try:
@@ -78,28 +78,27 @@ class KanpurgatoryVideo(VoiceoverScene):
             # Load SVG with explicit settings
             gradient_bar = SVGMobject(
                 file_name=svg_path,
-                should_center=True,  # Center the SVG
-                height=bar_height,   # Set exact height
-                width=bar_width,     # Set exact width
-                fill_opacity=1,      # Ensure full opacity
-                stroke_width=0       # No stroke
-            )
+                should_center=True,
+                height=bar_height,
+                width=bar_width,
+                fill_opacity=1,
+                stroke_width=0
+            ).set_z_index(1)
             
-            print(f"SVG loaded successfully. Dimensions: {gradient_bar.width} x {gradient_bar.height}")
-            print(f"SVG center position: {gradient_bar.get_center()}")
+            # Ensure the SVG loaded properly
+            print(f"SVG loaded with dimensions: {gradient_bar.width} x {gradient_bar.height}")
             
             if gradient_bar.width == 0 or gradient_bar.height == 0:
-                print("Warning: SVG has zero dimensions, falling back to rectangle")
                 raise ValueError("SVG loaded with zero dimensions")
                 
         except Exception as e:
             print(f"Error loading SVG: {e}")
-            # Fallback to a simple gradient using rectangles
+            # Fall back to the simple three-rectangle version
+            gradient_bar = VGroup()
             colors = ["#1E3D59", "#4B2D84", "#9B4DCA"]
             sections = len(colors)
             section_width = bar_width / sections
             
-            gradient_bar = VGroup()
             for i, color in enumerate(colors):
                 section = Rectangle(
                     width=section_width,
@@ -121,7 +120,7 @@ class KanpurgatoryVideo(VoiceoverScene):
             fill_color=BLACK,
             fill_opacity=1,
             stroke_width=0
-        )
+        ).set_z_index(2)
         
         # Create group and position it
         bar_group = VGroup(gradient_bar, black_bar)
