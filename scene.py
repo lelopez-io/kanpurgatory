@@ -55,7 +55,7 @@ class KanpurgatoryVideo(VoiceoverScene):
             self.set_speech_service(
                 ElevenLabsService(
                     api_key=api_key,
-                    voice_id="nPczCjzI2devNBz1zQrb"  # Brian voice ID for testing
+                    voice_id="hyqpbxvsDwE0hQA0TcGB"
                 )
             )
 
