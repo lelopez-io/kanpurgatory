@@ -1,13 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 20">
     <g id="gradient">
-        <rect x="0" y="0" width="100" height="20" fill="#1E3D59"/>
-        <rect x="100" y="0" width="100" height="20" fill="#233B5F"/>
-        <rect x="200" y="0" width="100" height="20" fill="#2A3965"/>
-        <rect x="300" y="0" width="100" height="20" fill="#31376B"/>
-        <rect x="400" y="0" width="100" height="20" fill="#383571"/>
-        <rect x="500" y="0" width="100" height="20" fill="#403377"/>
-        <rect x="600" y="0" width="100" height="20" fill="#483180"/>
-        <rect x="700" y="0" width="100" height="20" fill="#503090"/>
-        <rect x="800" y="0" width="100" height="20" fill="#5B2E9E"/>
+        <rect x="0" y="0" width="30" height="20" fill="#1E3D59"/>
+        <rect x="30" y="0" width="30" height="20" fill="#1F3C5B"/>
+        <rect x="60" y="0" width="30" height="20" fill="#213B5D"/>
+        <rect x="90" y="0" width="30" height="20" fill="#223A5F"/>
+        <rect x="120" y="0" width="30" height="20" fill="#243961"/>
+        <rect x="150" y="0" width="30" height="20" fill="#253863"/>
+        <rect x="180" y="0" width="30" height="20" fill="#273765"/>
+        <rect x="210" y="0" width="30" height="20" fill="#283667"/>
+        <rect x="240" y="0" width="30" height="20" fill="#2A3569"/>
+        <rect x="270" y="0" width="30" height="20" fill="#2C346B"/>
+        <rect x="300" y="0" width="30" height="20" fill="#2E346D"/>
+        <rect x="330" y="0" width="30" height="20" fill="#30346F"/>
+        <rect x="360" y="0" width="30" height="20" fill="#323471"/>
+        <rect x="390" y="0" width="30" height="20" fill="#343473"/>
+        <rect x="420" y="0" width="30" height="20" fill="#363475"/>
+        <rect x="450" y="0" width="30" height="20" fill="#383477"/>
+        <rect x="480" y="0" width="30" height="20" fill="#3A3379"/>
+        <rect x="510" y="0" width="30" height="20" fill="#3C337B"/>
+        <rect x="540" y="0" width="30" height="20" fill="#3E327D"/>
+        <rect x="570" y="0" width="30" height="20" fill="#40327F"/>
+        <rect x="600" y="0" width="30" height="20" fill="#423181"/>
+        <rect x="630" y="0" width="30" height="20" fill="#443185"/>
+        <rect x="660" y="0" width="30" height="20" fill="#463089"/>
+        <rect x="690" y="0" width="30" height="20" fill="#482F8D"/>
+        <rect x="720" y="0" width="30" height="20" fill="#4A2F91"/>
+        <rect x="750" y="0" width="30" height="20" fill="#4C2E95"/>
+        <rect x="780" y="0" width="30" height="20" fill="#4E2E97"/>
+        <rect x="810" y="0" width="30" height="20" fill="#512E99"/>
+        <rect x="840" y="0" width="30" height="20" fill="#542E9B"/>
+        <rect x="870" y="0" width="30" height="20" fill="#5B2E9E"/>
     </g>
 </svg>
