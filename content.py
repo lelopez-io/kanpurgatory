@@ -232,19 +232,24 @@ class Content:
         # Final escape
         (
             "Finally, four days after our",
-            "journey began, we broke free",
-            "of Kansas's grip. The first",
-            "hours remained a trial - hands",
-            "requiring rest each hour from",
-            "the tension of navigating",
-            "ice-slicked roads.",
+            "journey began, we attempted",
+            "our escape. The first three",
+            "hours remained a trial of",
+            "ice-slicked roads and white-",
+            "knuckled tension, each mile",
+            "demanding complete focus.",
             "",
-            "Yet we'd timed our departure",
-            "perfectly for once, arriving",
-            "in Colorado just after their",
-            "storm had passed, allowing their",
-            "more vigilant road crews time",
-            "to restore order."
+            "Only as we approached western",
+            "Kansas did the ice begin to",
+            "relent, the sun having done",
+            "its work. The roads improved",
+            "with each mile westward, and",
+            "crossing into Colorado felt",
+            "like entering another world -",
+            "their crews had already tamed",
+            "that morning's fresh snowfall,",
+            "leaving nothing but clear",
+            "paths before us."
         ),
         # The contrast
         (
