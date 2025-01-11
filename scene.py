@@ -49,26 +49,32 @@ class KanpurgatoryVideo(VoiceoverScene):
     def create_progress_bar(self):
         # Create progress bar at the very top
         bar_height = 0.2  # Increased height for visibility
+        bar_width = config.frame_width
         
-        # Yellow background bar (will be revealed)
+        # Create bars with exact same dimensions
         yellow_bar = Rectangle(
-            width=config.frame_width,
+            width=bar_width,
             height=bar_height,
             fill_color=YELLOW,
             fill_opacity=1,
-            stroke_width=0
-        ).to_edge(UP, buff=0)
+            stroke_width=0,
+            stroke_opacity=0  # Ensure no stroke
+        )
         
-        # White overlay bar that will shrink
         white_bar = Rectangle(
-            width=config.frame_width,
+            width=bar_width,
             height=bar_height,
             fill_color=WHITE,
             fill_opacity=1,
-            stroke_width=0
-        ).to_edge(UP, buff=0)
+            stroke_width=0,
+            stroke_opacity=0  # Ensure no stroke
+        )
         
-        return VGroup(yellow_bar, white_bar)
+        # Create group and position it
+        bar_group = VGroup(yellow_bar, white_bar)
+        bar_group.move_to([0, config.frame_height/2 - bar_height/2, 0])  # Precise positioning at top
+        
+        return bar_group
     
     def create_passage_counter(self):
         # Create counter text in top right
