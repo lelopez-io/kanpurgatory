@@ -76,6 +76,19 @@ poetry install
 source $(poetry env info --path)/bin/activate
 ```
 
+### Development Notes
+
+#### Font Changes and Cache
+When making changes to fonts, you may need to clear Manim's cache to see the changes:
+
+```bash
+# Remove cached renders
+rm -rf media/
+
+# Then re-run your render command
+VOICE_SERVICE=gtts poetry run manim -pql scene.py KanpurgatoryVideo
+```
+
 ### Configuration
 
 1. Create a `.env` file in the project root
