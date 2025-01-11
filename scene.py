@@ -60,7 +60,6 @@ class KanpurgatoryVideo(VoiceoverScene):
             )
 
     def create_progress_bar(self):
-        # Create progress bar at the very top
         bar_height = 0.2  # Increased height for visibility
         bar_width = config.frame_width
         
@@ -76,22 +75,44 @@ class KanpurgatoryVideo(VoiceoverScene):
             if not os.path.exists(svg_path):
                 raise FileNotFoundError(f"SVG file not found at {svg_path}")
                 
+            # Load SVG with explicit settings
             gradient_bar = SVGMobject(
-                file_name=svg_path,  # Pass the absolute path as string
-                height=bar_height,
-                width=bar_width,
-                stroke_width=0  # No stroke for clean edges
+                file_name=svg_path,
+                should_center=True,  # Center the SVG
+                height=bar_height,   # Set exact height
+                width=bar_width,     # Set exact width
+                fill_opacity=1,      # Ensure full opacity
+                stroke_width=0       # No stroke
             )
+            
+            print(f"SVG loaded successfully. Dimensions: {gradient_bar.width} x {gradient_bar.height}")
+            print(f"SVG center position: {gradient_bar.get_center()}")
+            
+            if gradient_bar.width == 0 or gradient_bar.height == 0:
+                print("Warning: SVG has zero dimensions, falling back to rectangle")
+                raise ValueError("SVG loaded with zero dimensions")
+                
         except Exception as e:
             print(f"Error loading SVG: {e}")
-            # Fallback to a simple colored rectangle if SVG fails
-            gradient_bar = Rectangle(
-                width=bar_width,
-                height=bar_height,
-                fill_color=BLUE,
-                fill_opacity=1,
-                stroke_width=0
-            )
+            # Fallback to a simple gradient using rectangles
+            colors = ["#1E3D59", "#4B2D84", "#9B4DCA"]
+            sections = len(colors)
+            section_width = bar_width / sections
+            
+            gradient_bar = VGroup()
+            for i, color in enumerate(colors):
+                section = Rectangle(
+                    width=section_width,
+                    height=bar_height,
+                    fill_color=color,
+                    fill_opacity=1,
+                    stroke_width=0
+                ).move_to([
+                    -bar_width/2 + section_width/2 + i*section_width,
+                    0,
+                    0
+                ])
+                gradient_bar.add(section)
         
         # Create black overlay
         black_bar = Rectangle(
@@ -99,12 +120,12 @@ class KanpurgatoryVideo(VoiceoverScene):
             height=bar_height,
             fill_color=BLACK,
             fill_opacity=1,
-            stroke_width=0,
+            stroke_width=0
         )
         
         # Create group and position it
         bar_group = VGroup(gradient_bar, black_bar)
-        bar_group.move_to([0, config.frame_height/2 - bar_height/2, 0])  # Precise positioning at top
+        bar_group.move_to([0, config.frame_height/2 - bar_height/2, 0])
         
         return bar_group
 
