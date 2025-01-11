@@ -228,7 +228,7 @@ class Content:
             "meteorological divination,",
             "consulting AI to decipher the",
             "National Weather Service's",
-            "cryptic forecasts,||| determined",
+            "cryptic forecasts. ***Determined***",
             "not to be caught in such",
             "limbo again."
         ),
@@ -268,10 +268,10 @@ class Content:
         # Final reflection
         (
             "Beware ***Kanpurgatory***",
-            "- where every soul caught",
+            "- ***where every soul caught",
             "between departure and",
             "destination discovers the",
-            "true meaning of limbo.",
+            "true meaning of limbo.***",
             "",
             "In our case, it",
             "was a four-day lesson in",
@@ -284,8 +284,8 @@ class Content:
         # Epilogue
         (
             "Some say purgatory is a",
-            "place of cleansing|||",
-            "if so, we emerged from Kansas",
+            "place of cleansing.|||",
+            "If so, we emerged from Kansas",
             "scrubbed clean of any illusions",
             "about winter travel through",
             "the Great Plains, with a",
